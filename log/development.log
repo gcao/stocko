@@ -688,3 +688,200 @@ Migrating to CreateMarketData (20081005211121)
   [4;36;1mSQL (0.002944)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20081005192812')[0m
   [4;35;1mSQL (0.002601)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20081005194611')[0m
   [4;36;1mSQL (0.002488)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20081005195315')[0m
+  [4;36;1mSQL (0.001909)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000488)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateMarkets (20081005192812)
+Migrating to CreateStocks (20081005194611)
+Migrating to CreateStockPrices (20081005195315)
+Migrating to CreateMarketData (20081005211121)
+  [4;36;1mSQL (0.000364)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.000644)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.000369)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.000436)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.000200)[0m   [0;1mPRAGMA index_list("market_data")[0m
+  [4;35;1mSQL (0.000246)[0m   [0mPRAGMA index_info('market_data_market_id_date')[0m
+  [4;36;1mSQL (0.000175)[0m   [0;1mPRAGMA index_list("markets")[0m
+  [4;35;1mSQL (0.000170)[0m   [0mPRAGMA index_info('markets_name')[0m
+  [4;36;1mSQL (0.000178)[0m   [0;1mPRAGMA index_list("stock_prices")[0m
+  [4;35;1mSQL (0.000241)[0m   [0mPRAGMA index_info('stock_prices_stock_id_date')[0m
+  [4;36;1mSQL (0.000211)[0m   [0;1mPRAGMA index_list("stocks")[0m
+  [4;35;1mSQL (0.000209)[0m   [0mPRAGMA index_info('stocks_name')[0m
+  [4;36;1mSQL (0.000571)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000194)[0m   [0mselect sqlite_version(*)[0m
+  [4;36;1mSQL (0.021788)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (0.002661)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (0.000293)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000251)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateMarkets (20081005192812)
+  [4;36;1mSQL (0.003403)[0m   [0;1mCREATE TABLE "markets" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "description" varchar(4000)) [0m
+  [4;35;1mSQL (0.001771)[0m   [0mCREATE UNIQUE INDEX "markets_name" ON "markets" ("name")[0m
+  [4;36;1mSQL (0.001582)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20081005192812')[0m
+Migrating to CreateStocks (20081005194611)
+  [4;35;1mSQL (0.002233)[0m   [0mCREATE TABLE "stocks" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "market_id" integer NOT NULL, "name" varchar(255), "description" varchar(4000)) [0m
+  [4;36;1mSQL (0.001819)[0m   [0;1mCREATE UNIQUE INDEX "stocks_name" ON "stocks" ("name")[0m
+  [4;35;1mSQL (0.001670)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20081005194611')[0m
+Migrating to CreateStockPrices (20081005195315)
+  [4;36;1mSQL (0.024685)[0m   [0;1mCREATE TABLE "stock_prices" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "stock_id" integer NOT NULL, "date" date NOT NULL, "volume" integer, "open" decimal(5,2), "close" decimal(5,2), "high" decimal(5,2), "low" decimal(5,2)) [0m
+  [4;35;1mSQL (0.012870)[0m   [0mCREATE UNIQUE INDEX "stock_prices_stock_id_date" ON "stock_prices" ("stock_id", "date")[0m
+  [4;36;1mSQL (0.002776)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20081005195315')[0m
+Migrating to CreateMarketData (20081005211121)
+  [4;35;1mSQL (0.002571)[0m   [0mCREATE TABLE "market_data" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "market_id" integer NOT NULL, "date" date NOT NULL, "open" decimal(5,2), "close" decimal(5,2), "high" decimal(5,2), "low" decimal(5,2)) [0m
+  [4;36;1mSQL (0.002779)[0m   [0;1mCREATE UNIQUE INDEX "market_data_market_id_date" ON "market_data" ("market_id", "date")[0m
+  [4;35;1mSQL (0.001765)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20081005211121')[0m
+  [4;36;1mSQL (0.000458)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000267)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000298)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000278)[0m   [0mPRAGMA index_list("market_data")[0m
+  [4;36;1mSQL (0.000240)[0m   [0;1mPRAGMA index_info('market_data_market_id_date')[0m
+  [4;35;1mSQL (0.000177)[0m   [0mPRAGMA index_list("markets")[0m
+  [4;36;1mSQL (0.000137)[0m   [0;1mPRAGMA index_info('markets_name')[0m
+  [4;35;1mSQL (0.000250)[0m   [0mPRAGMA index_list("stock_prices")[0m
+  [4;36;1mSQL (0.000210)[0m   [0;1mPRAGMA index_info('stock_prices_stock_id_date')[0m
+  [4;35;1mSQL (0.000190)[0m   [0mPRAGMA index_list("stocks")[0m
+  [4;36;1mSQL (0.000155)[0m   [0;1mPRAGMA index_info('stocks_name')[0m
+  [4;35;1mSQL (0.000202)[0m   [0mselect sqlite_version(*)[0m
+  [4;36;1mSQL (0.000373)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.019216)[0m   [0mCREATE TABLE "market_data" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "market_id" integer NOT NULL, "date" date NOT NULL, "open" decimal(5,2), "close" decimal(5,2), "high" decimal(5,2), "low" decimal(5,2)) [0m
+  [4;36;1mSQL (0.002157)[0m   [0;1mCREATE UNIQUE INDEX "market_data_market_id_date" ON "market_data" ("market_id", "date")[0m
+  [4;35;1mSQL (0.000296)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.001937)[0m   [0;1mCREATE TABLE "markets" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "description" varchar(4000)) [0m
+  [4;35;1mSQL (0.002105)[0m   [0mCREATE UNIQUE INDEX "markets_name" ON "markets" ("name")[0m
+  [4;36;1mSQL (0.000366)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.001834)[0m   [0mCREATE TABLE "stock_prices" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "stock_id" integer NOT NULL, "date" date NOT NULL, "volume" integer, "open" decimal(5,2), "close" decimal(5,2), "high" decimal(5,2), "low" decimal(5,2)) [0m
+  [4;36;1mSQL (0.002042)[0m   [0;1mCREATE UNIQUE INDEX "stock_prices_stock_id_date" ON "stock_prices" ("stock_id", "date")[0m
+  [4;35;1mSQL (0.000363)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.001898)[0m   [0;1mCREATE TABLE "stocks" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "market_id" integer NOT NULL, "name" varchar(255), "description" varchar(4000)) [0m
+  [4;35;1mSQL (0.009285)[0m   [0mCREATE UNIQUE INDEX "stocks_name" ON "stocks" ("name")[0m
+  [4;36;1mSQL (0.000396)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.011560)[0m   [0mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;36;1mSQL (0.001829)[0m   [0;1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;35;1mSQL (0.000396)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.000123)[0m   [0;1mSELECT version FROM "schema_migrations"[0m
+  [4;35;1mSQL (0.002588)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20081005211121')[0m
+  [4;36;1mSQL (0.003351)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20081005192812')[0m
+  [4;35;1mSQL (0.002282)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20081005194611')[0m
+  [4;36;1mSQL (0.003269)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20081005195315')[0m
+  [4;36;1mSQL (0.000356)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000169)[0m   [0mselect sqlite_version(*)[0m
+  [4;36;1mSQL (0.071292)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (0.002023)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (0.000343)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000210)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateMarkets (20081005192812)
+  [4;36;1mSQL (0.001993)[0m   [0;1mCREATE TABLE "markets" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "description" varchar(4000)) [0m
+  [4;35;1mSQL (0.001960)[0m   [0mCREATE UNIQUE INDEX "markets_name" ON "markets" ("name")[0m
+  [4;36;1mSQL (0.001843)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20081005192812')[0m
+Migrating to CreateStocks (20081005194611)
+  [4;35;1mSQL (0.001890)[0m   [0mCREATE TABLE "stocks" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "market_id" integer NOT NULL, "name" varchar(255), "description" varchar(4000)) [0m
+  [4;36;1mSQL (0.001934)[0m   [0;1mCREATE UNIQUE INDEX "stocks_name" ON "stocks" ("name")[0m
+  [4;35;1mSQL (0.001831)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20081005194611')[0m
+Migrating to CreateStockPrices (20081005195315)
+  [4;36;1mSQL (0.002274)[0m   [0;1mCREATE TABLE "stock_prices" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "stock_id" integer NOT NULL, "date" date NOT NULL, "volume" integer, "open" decimal(5,2), "close" decimal(5,2), "high" decimal(5,2), "low" decimal(5,2)) [0m
+  [4;35;1mSQL (0.002035)[0m   [0mCREATE UNIQUE INDEX "stock_prices_stock_id_date" ON "stock_prices" ("stock_id", "date")[0m
+  [4;36;1mSQL (0.001935)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20081005195315')[0m
+Migrating to CreateMarketData (20081005211121)
+  [4;35;1mSQL (0.002701)[0m   [0mCREATE TABLE "market_data" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "market_id" integer NOT NULL, "date" date NOT NULL, "volume" integer, "open" decimal(5,2), "close" decimal(5,2), "high" decimal(5,2), "low" decimal(5,2)) [0m
+  [4;36;1mSQL (0.002634)[0m   [0;1mCREATE UNIQUE INDEX "market_data_market_id_date" ON "market_data" ("market_id", "date")[0m
+  [4;35;1mSQL (0.001824)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20081005211121')[0m
+  [4;36;1mSQL (0.000583)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000333)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000389)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000287)[0m   [0mPRAGMA index_list("market_data")[0m
+  [4;36;1mSQL (0.000248)[0m   [0;1mPRAGMA index_info('market_data_market_id_date')[0m
+  [4;35;1mSQL (0.000175)[0m   [0mPRAGMA index_list("markets")[0m
+  [4;36;1mSQL (0.000230)[0m   [0;1mPRAGMA index_info('markets_name')[0m
+  [4;35;1mSQL (0.000175)[0m   [0mPRAGMA index_list("stock_prices")[0m
+  [4;36;1mSQL (0.000232)[0m   [0;1mPRAGMA index_info('stock_prices_stock_id_date')[0m
+  [4;35;1mSQL (0.000150)[0m   [0mPRAGMA index_list("stocks")[0m
+  [4;36;1mSQL (0.000151)[0m   [0;1mPRAGMA index_info('stocks_name')[0m
+  [4;35;1mSQL (0.001176)[0m   [0mselect sqlite_version(*)[0m
+  [4;36;1mSQL (0.000418)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.001918)[0m   [0mCREATE TABLE "market_data" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "market_id" integer NOT NULL, "date" date NOT NULL, "volume" integer, "open" decimal(5,2), "close" decimal(5,2), "high" decimal(5,2), "low" decimal(5,2)) [0m
+  [4;36;1mSQL (0.005689)[0m   [0;1mCREATE UNIQUE INDEX "market_data_market_id_date" ON "market_data" ("market_id", "date")[0m
+  [4;35;1mSQL (0.000322)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.001901)[0m   [0;1mCREATE TABLE "markets" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "description" varchar(4000)) [0m
+  [4;35;1mSQL (0.002022)[0m   [0mCREATE UNIQUE INDEX "markets_name" ON "markets" ("name")[0m
+  [4;36;1mSQL (0.000397)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.003508)[0m   [0mCREATE TABLE "stock_prices" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "stock_id" integer NOT NULL, "date" date NOT NULL, "volume" integer, "open" decimal(5,2), "close" decimal(5,2), "high" decimal(5,2), "low" decimal(5,2)) [0m
+  [4;36;1mSQL (0.002024)[0m   [0;1mCREATE UNIQUE INDEX "stock_prices_stock_id_date" ON "stock_prices" ("stock_id", "date")[0m
+  [4;35;1mSQL (0.000455)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.002004)[0m   [0;1mCREATE TABLE "stocks" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "market_id" integer NOT NULL, "name" varchar(255), "description" varchar(4000)) [0m
+  [4;35;1mSQL (0.005019)[0m   [0mCREATE UNIQUE INDEX "stocks_name" ON "stocks" ("name")[0m
+  [4;36;1mSQL (0.000542)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.002223)[0m   [0mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;36;1mSQL (0.006667)[0m   [0;1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;35;1mSQL (0.000875)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.000192)[0m   [0;1mSELECT version FROM "schema_migrations"[0m
+  [4;35;1mSQL (0.002027)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20081005211121')[0m
+  [4;36;1mSQL (0.001846)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20081005192812')[0m
+  [4;35;1mSQL (0.002156)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20081005194611')[0m
+  [4;36;1mSQL (0.002048)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20081005195315')[0m

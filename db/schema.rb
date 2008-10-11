@@ -14,6 +14,7 @@ ActiveRecord::Schema.define(:version => 20081005211121) do
   create_table "market_data", :force => true do |t|
     t.integer "market_id",                               :null => false
     t.date    "date",                                    :null => false
+    t.integer "volume"
     t.decimal "open",      :precision => 5, :scale => 2
     t.decimal "close",     :precision => 5, :scale => 2
     t.decimal "high",      :precision => 5, :scale => 2
@@ -30,12 +31,13 @@ ActiveRecord::Schema.define(:version => 20081005211121) do
   add_index "markets", ["name"], :name => "markets_name", :unique => true
 
   create_table "stock_prices", :force => true do |t|
-    t.integer "stock_id", :null => false
-    t.date    "date",     :null => false
-    t.integer "open"
-    t.integer "close"
-    t.integer "high"
-    t.integer "low"
+    t.integer "stock_id",                               :null => false
+    t.date    "date",                                   :null => false
+    t.integer "volume"
+    t.decimal "open",     :precision => 5, :scale => 2
+    t.decimal "close",    :precision => 5, :scale => 2
+    t.decimal "high",     :precision => 5, :scale => 2
+    t.decimal "low",      :precision => 5, :scale => 2
   end
 
   add_index "stock_prices", ["stock_id", "date"], :name => "stock_prices_stock_id_date", :unique => true

@@ -25,4 +25,14 @@ describe Market do
       m.stocks[1].name.should eql('stockb')
     end
   end
+  
+  it "market can have n days of data" do
+    market = Market.create!(:name => :a_market)
+    MarketData.create!(:market => market, :date => '1/1/2008')
+    MarketData.create!(:market => market, :date => '1/2/2008')
+    Market.find(market.id).should do |m|
+      m.data[0].date.should eql('1/1/2008')
+      m.data[1].date.should eql('1/2/2008')
+    end
+  end
 end

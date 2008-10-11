@@ -3,6 +3,7 @@ class CreateMarketData < ActiveRecord::Migration
     create_table :market_data do |t|
       t.integer :market_id, :null => false
       t.date :date, :null => false
+      t.integer :volume
       t.decimal :open, :precision => 5, :scale => 2
       t.decimal :close, :precision => 5, :scale => 2
       t.decimal :high, :precision => 5, :scale => 2

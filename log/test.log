@@ -286,3 +286,101 @@
   [4;36;1mMarket Destroy (0.000438)[0m   [0;1m DELETE FROM "markets"
  WHERE "id" = 5
 [0m
+  [4;36;1mMarket Create (0.000853)[0m   [0;1mINSERT INTO "markets" ("name", "description") VALUES('--- :a_market
+', NULL)[0m
+  [4;35;1mStock Create (0.000684)[0m   [0mINSERT INTO "stocks" ("name", "description", "market_id") VALUES('--- :stock
+', NULL, 6)[0m
+  [4;36;1mStock Load (0.000352)[0m   [0;1mSELECT * FROM "stocks" WHERE ("stocks".market_id = 6) [0m
+  [4;35;1mStockPrice Load (0.000133)[0m   [0mSELECT * FROM "stock_prices" WHERE ("stock_prices".stock_id = 2) [0m
+  [4;36;1mStock Destroy (0.000356)[0m   [0;1m DELETE FROM "stocks"
+ WHERE "id" = 2
+[0m
+  [4;35;1mMarketData Load (0.000247)[0m   [0mSELECT * FROM "market_data" WHERE ("market_data".market_id = 6) [0m
+  [4;36;1mMarket Destroy (0.000191)[0m   [0;1m DELETE FROM "markets"
+ WHERE "id" = 6
+[0m
+  [4;36;1mMarket Create (0.000610)[0m   [0;1mINSERT INTO "markets" ("name", "description") VALUES('--- :a_market
+', NULL)[0m
+  [4;35;1mStock Create (0.000609)[0m   [0mINSERT INTO "stocks" ("name", "description", "market_id") VALUES('--- :stock
+', NULL, 1)[0m
+  [4;36;1mStockPrice Create (0.000633)[0m   [0;1mINSERT INTO "stock_prices" ("close", "high", "date", "stock_id", "volume", "low", "open") VALUES(200.0, 300.0, '2008-01-01', 1, 1000, 50.0, 100.0)[0m
+  [4;35;1mStockPrice Load (0.000382)[0m   [0mSELECT * FROM "stock_prices" WHERE ("stock_prices"."id" = 1) [0m
+  [4;36;1mStock Load (0.000485)[0m   [0;1mSELECT * FROM "stocks" WHERE ("stocks".market_id = 1) [0m
+  [4;35;1mStockPrice Load (0.000219)[0m   [0mSELECT * FROM "stock_prices" WHERE ("stock_prices".stock_id = 1) [0m
+  [4;36;1mStock Destroy (0.000447)[0m   [0;1m DELETE FROM "stocks"
+ WHERE "id" = 1
+[0m
+  [4;35;1mMarketData Load (0.000238)[0m   [0mSELECT * FROM "market_data" WHERE ("market_data".market_id = 1) [0m
+  [4;36;1mMarket Destroy (0.000186)[0m   [0;1m DELETE FROM "markets"
+ WHERE "id" = 1
+[0m
+  [4;36;1mMarket Create (0.000600)[0m   [0;1mINSERT INTO "markets" ("name", "description") VALUES('--- :a_market
+', NULL)[0m
+  [4;35;1mMarketData Create (0.000692)[0m   [0mINSERT INTO "market_data" ("close", "high", "date", "market_id", "volume", "low", "open") VALUES(10200.0, 10300.0, '2008-01-01', 1, 1000, 10050.0, 10000.0)[0m
+  [4;36;1mMarketData Load (0.000338)[0m   [0;1mSELECT * FROM "market_data" WHERE ("market_data"."id" = 1) [0m
+  [4;35;1mStock Load (0.000373)[0m   [0mSELECT * FROM "stocks" WHERE ("stocks".market_id = 1) [0m
+  [4;36;1mMarketData Load (0.000165)[0m   [0;1mSELECT * FROM "market_data" WHERE ("market_data".market_id = 1) [0m
+  [4;35;1mMarket Destroy (0.000437)[0m   [0m DELETE FROM "markets"
+ WHERE "id" = 1
+[0m
+  [4;36;1mMarket Create (0.000601)[0m   [0;1mINSERT INTO "markets" ("name", "description") VALUES('--- :a_market
+', '--- :a_description
+')[0m
+  [4;35;1mMarket Load (0.000195)[0m   [0mSELECT * FROM "markets" WHERE ("markets"."id" = 2) [0m
+  [4;36;1mMarket Create (0.001556)[0m   [0;1mINSERT INTO "markets" ("name", "description") VALUES('--- :a_market
+', NULL)[0m
+  [4;35;1mStock Create (0.000218)[0m   [0mINSERT INTO "stocks" ("name", "description", "market_id") VALUES('--- :stocka
+', NULL, 2)[0m
+  [4;36;1mStock Create (0.000107)[0m   [0;1mINSERT INTO "stocks" ("name", "description", "market_id") VALUES('--- :stockb
+', NULL, 2)[0m
+  [4;35;1mMarket Load (0.000182)[0m   [0mSELECT * FROM "markets" WHERE ("markets"."id" = 2) [0m
+  [4;36;1mMarket Create (0.000578)[0m   [0;1mINSERT INTO "markets" ("name", "description") VALUES('--- :a_market
+', NULL)[0m
+  [4;35;1mMarketData Create (0.000241)[0m   [0mINSERT INTO "market_data" ("close", "high", "date", "market_id", "volume", "low", "open") VALUES(NULL, NULL, '2008-01-01', 2, NULL, NULL, NULL)[0m
+  [4;36;1mMarketData Create (0.000133)[0m   [0;1mINSERT INTO "market_data" ("close", "high", "date", "market_id", "volume", "low", "open") VALUES(NULL, NULL, '2008-01-02', 2, NULL, NULL, NULL)[0m
+  [4;35;1mMarket Load (0.000185)[0m   [0mSELECT * FROM "markets" WHERE ("markets"."id" = 2) [0m
+  [4;36;1mMarket Create (0.000580)[0m   [0;1mINSERT INTO "markets" ("name", "description") VALUES('--- :a_market
+', '--- :a_description
+')[0m
+  [4;35;1mMarket Load (0.000190)[0m   [0mSELECT * FROM "markets" WHERE ("markets"."id" = 2) [0m
+  [4;36;1mMarket Create (0.000616)[0m   [0;1mINSERT INTO "markets" ("name", "description") VALUES('--- :a_market
+', NULL)[0m
+  [4;35;1mStock Create (0.000237)[0m   [0mINSERT INTO "stocks" ("name", "description", "market_id") VALUES('--- :stocka
+', NULL, 2)[0m
+  [4;36;1mStock Create (0.000149)[0m   [0;1mINSERT INTO "stocks" ("name", "description", "market_id") VALUES('--- :stockb
+', NULL, 2)[0m
+  [4;35;1mMarket Load (0.000215)[0m   [0mSELECT * FROM "markets" WHERE ("markets"."id" = 2) [0m
+  [4;36;1mMarket Create (0.000548)[0m   [0;1mINSERT INTO "markets" ("name", "description") VALUES('--- :a_market
+', NULL)[0m
+  [4;35;1mMarketData Create (0.000231)[0m   [0mINSERT INTO "market_data" ("close", "high", "date", "market_id", "volume", "low", "open") VALUES(NULL, NULL, '2008-01-01', 2, NULL, NULL, NULL)[0m
+  [4;36;1mMarketData Create (0.000120)[0m   [0;1mINSERT INTO "market_data" ("close", "high", "date", "market_id", "volume", "low", "open") VALUES(NULL, NULL, '2008-01-02', 2, NULL, NULL, NULL)[0m
+  [4;35;1mMarket Load (0.000201)[0m   [0mSELECT * FROM "markets" WHERE ("markets"."id" = 2) [0m
+  [4;36;1mMarket Create (0.000540)[0m   [0;1mINSERT INTO "markets" ("name", "description") VALUES('--- :a_market
+', '--- :a_description
+')[0m
+  [4;35;1mMarket Load (0.000198)[0m   [0mSELECT * FROM "markets" WHERE ("markets"."id" = 2) [0m
+  [4;36;1mMarket Create (0.000573)[0m   [0;1mINSERT INTO "markets" ("name", "description") VALUES('--- :a_market
+', NULL)[0m
+  [4;35;1mStock Create (0.000213)[0m   [0mINSERT INTO "stocks" ("name", "description", "market_id") VALUES('--- :stocka
+', NULL, 2)[0m
+  [4;36;1mStock Create (0.000156)[0m   [0;1mINSERT INTO "stocks" ("name", "description", "market_id") VALUES('--- :stockb
+', NULL, 2)[0m
+  [4;35;1mMarket Load (0.000236)[0m   [0mSELECT * FROM "markets" WHERE ("markets"."id" = 2) [0m
+  [4;36;1mMarket Create (0.000644)[0m   [0;1mINSERT INTO "markets" ("name", "description") VALUES('--- :a_market
+', NULL)[0m
+  [4;35;1mMarketData Create (0.000277)[0m   [0mINSERT INTO "market_data" ("close", "high", "date", "market_id", "volume", "low", "open") VALUES(NULL, NULL, '2008-01-01', 2, NULL, NULL, NULL)[0m
+  [4;36;1mMarketData Create (0.000145)[0m   [0;1mINSERT INTO "market_data" ("close", "high", "date", "market_id", "volume", "low", "open") VALUES(NULL, NULL, '2008-01-02', 2, NULL, NULL, NULL)[0m
+  [4;35;1mMarket Load (0.000186)[0m   [0mSELECT * FROM "markets" WHERE ("markets"."id" = 2) [0m
+  [4;36;1mMarket Load (0.000174)[0m   [0;1mSELECT * FROM "markets" WHERE ("markets"."name" = 'dowjones') LIMIT 1[0m
+  [4;36;1mMarket Create (0.000634)[0m   [0;1mINSERT INTO "markets" ("name", "description") VALUES('dowjones', NULL)[0m
+  [4;35;1mMarket Load (0.000228)[0m   [0mSELECT * FROM "markets" WHERE ("markets"."name" = 'dowjones') LIMIT 1[0m
+  [4;36;1mMarketData Load (0.000264)[0m   [0;1mSELECT * FROM "market_data" WHERE ("market_data".market_id = 2) [0m
+  [4;36;1mMarket Create (0.000580)[0m   [0;1mINSERT INTO "markets" ("name", "description") VALUES('dowjones', NULL)[0m
+  [4;35;1mMarket Load (0.000214)[0m   [0mSELECT * FROM "markets" WHERE ("markets"."name" = 'dowjones') LIMIT 1[0m
+  [4;36;1mMarketData Load (0.000192)[0m   [0;1mSELECT * FROM "market_data" WHERE ("market_data".market_id = 2) [0m
+  [4;36;1mMarket Create (0.000872)[0m   [0;1mINSERT INTO "markets" ("name", "description") VALUES('dowjones', NULL)[0m
+  [4;35;1mMarket Load (0.000236)[0m   [0mSELECT * FROM "markets" WHERE ("markets"."name" = 'dowjones') LIMIT 1[0m
+  [4;36;1mMarketData Load (0.000193)[0m   [0;1mSELECT * FROM "market_data" WHERE ("market_data".market_id = 2) [0m
+  [4;36;1mMarket Create (0.000571)[0m   [0;1mINSERT INTO "markets" ("name", "description") VALUES('dowjones', NULL)[0m
+  [4;35;1mMarket Load (0.000220)[0m   [0mSELECT * FROM "markets" WHERE ("markets"."name" = 'dowjones') LIMIT 1[0m
+  [4;36;1mSQL (0.000196)[0m   [0;1mSELECT count(*) AS count_all FROM "market_data" WHERE ("market_data".market_id = 2) [0m
