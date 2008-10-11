@@ -1,2 +1,19 @@
 Use this README file to introduce your application and point to useful places in the API for learning more.
 Run "rake doc:app" to generate API documentation for your models, controllers, helpers, and libraries.
+
+Postgres Notes
+
+add these to database.yml
+
+development:
+  adapter: postgresql
+  host: localhost
+  database: stocko_dev
+  username: stocko
+  password: stocko
+  
+
+Install pg gem
+
+sudo bash
+export ARCHFLAGS='-arch i386'; gem install pg

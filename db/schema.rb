@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(:version => 20081005211121) do
     t.decimal "low",       :precision => 10, :scale => 4
   end
 
-  add_index "market_data", ["market_id", "date"], :name => "market_data_market_id_date", :unique => true
+  add_index "market_data", ["date", "market_id"], :name => "market_data_market_id_date", :unique => true
 
   create_table "markets", :force => true do |t|
     t.string "name"
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(:version => 20081005211121) do
     t.decimal "low",      :precision => 8, :scale => 4
   end
 
-  add_index "stock_prices", ["stock_id", "date"], :name => "stock_prices_stock_id_date", :unique => true
+  add_index "stock_prices", ["date", "stock_id"], :name => "stock_prices_stock_id_date", :unique => true
 
   create_table "stocks", :force => true do |t|
     t.integer "market_id",                   :null => false
