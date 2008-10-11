@@ -17,7 +17,9 @@ module Stocko
           else
             date = row[1]
           end
-          values << [market.id, row[1], row[2], row[3], row[4], row[5], row[6]]
+          converted_date = date.clone
+          converted_date.insert(6, '20') if converted_date =~ %r(^\d+/\d+/\d\d$)
+          values << [market.id, converted_date, row[2], row[3], row[4], row[5], row[6]]
         end
         
         MarketData.import columns, values, :validate => false

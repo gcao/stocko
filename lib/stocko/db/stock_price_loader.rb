@@ -20,7 +20,9 @@ module Stocko
             date = row[1]
           end
           stock = Stock.find_by_name row[0].downcase unless stock
-          values << [stock.id, row[1], row[2], row[3], row[4], row[5], row[6]]
+          converted_date = date.clone
+          converted_date.insert(6, '20') if converted_date =~ %r(^\d+/\d+/\d\d$)
+          values << [stock.id, converted_date, row[2], row[3], row[4], row[5], row[6]]
         end
         
         StockPrice.import columns, values, :validate => false
