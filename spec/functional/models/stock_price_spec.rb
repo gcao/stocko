@@ -6,10 +6,6 @@ describe StockPrice do
     @stock = Stock.create!(:market => @market, :name => :stock)
   end
 
-  after :all do
-    @market.destroy
-  end
-  
   it "should have date, volume, open, close, high, low" do
     stock_price = StockPrice.create!(
       :stock => @stock,

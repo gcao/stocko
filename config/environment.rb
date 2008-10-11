@@ -66,4 +66,5 @@ Rails::Initializer.run do |config|
   # config.active_record.observers = :cacher, :garbage_collector
   
   config.gem "rspec-rails", :lib => "spec" 
+  config.gem "ar-extensions"
 end

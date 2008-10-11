@@ -8,3 +8,10 @@ require 'rake/testtask'
 require 'rake/rdoctask'
 
 require 'tasks/rails'
+
+desc "Recreate db and load initial data for DEV"
+task :'db:refresh' => ['db:migrate:reset', 'db:test:load'] do
+  ENV["RAILS_ENV"] = "development"
+  require "config/environment"
+  Stocko::Db::MarketLoader.load_from_directory 'db/raw_data/dowjones', :skip_lines => 1
+end

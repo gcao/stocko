@@ -5,10 +5,6 @@ describe MarketData do
     @market = Market.create!(:name => :a_market)
   end
 
-  after :all do
-    @market.destroy
-  end
-  
   it "should have date, open, close, high, low" do
     market_data = MarketData.create!(
       :market => @market,

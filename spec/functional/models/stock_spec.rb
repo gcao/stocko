@@ -5,10 +5,6 @@ describe Stock do
     @market = Market.create!(:name => :a_market)
   end
 
-  after :all do
-    @market.destroy
-  end
-
   describe "valid" do
 
     it "should have name, description" do

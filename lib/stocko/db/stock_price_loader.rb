@@ -1,10 +1,12 @@
 module Stocko
   module Db
-    class MarketDataLoader
-      def self.load_from_file file, market, options = {:skip_lines => 0}
-        columns = [:market_id, :date, :volume, :high, :low, :open, :close]
+    class StockPriceLoader
+      def self.load_from_file file, options = {:skip_lines => 0}
+        columns = [:stock_id, :date, :volume, :high, :low, :open, :close]
         values = []
 
+        stock = nil
+        
         skip_lines = options[:skip_lines]
         line_no = 0
         date = nil
@@ -17,10 +19,11 @@ module Stocko
           else
             date = row[1]
           end
-          values << [market.id, row[1], row[2], row[3], row[4], row[5], row[6]]
+          stock = Stock.find_by_name row[0].downcase unless stock
+          values << [stock.id, row[1], row[2], row[3], row[4], row[5], row[6]]
         end
         
-        MarketData.import columns, values, :validate => false
+        StockPrice.import columns, values, :validate => false
       end
     end
   end

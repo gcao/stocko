@@ -35,4 +35,8 @@ describe Market do
       m.data[1].date.should eql('1/2/2008')
     end
   end
+  
+  it "to_s returns market name" do
+    Market.new(:name => 'abc').to_s.should eql('abc')
+  end
 end

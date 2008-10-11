@@ -4,8 +4,11 @@ module Stocko
   module Db
     describe MarketDataLoader do
       it "should load market csv into market table" do
-        Market.create!(:name => 'dowjones')
-        MarketDataLoader.new.load_from_file RAILS_ROOT + '/spec/fixtures/market_data.csv', 'dowjones'
+        market = Market.create!(:name => 'dowjones')
+        
+        MarketDataLoader.load_from_file(
+          RAILS_ROOT + '/spec/fixtures/csv/market_data.csv', market, :skip_lines => 1)
+        
         market = Market.find_by_name 'dowjones'
         market.data.size.should eql(2)
         market.data.should do |data|
@@ -22,6 +25,16 @@ module Stocko
           data[1].high.should eql('10369.55')
           data[1].close.should eql('10218.09')
         end
+      end
+      
+      it "should skip duplicate line (has same date as previous line)" do
+        market = Market.create!(:name => 'dowjones')
+        
+        MarketDataLoader.load_from_file(
+          RAILS_ROOT + '/spec/fixtures/csv/market_data_dup_lines.csv', market, :skip_lines => 1)
+        
+        market = Market.find_by_name 'dowjones'
+        market.data.size.should eql(1)
       end
     end
   end

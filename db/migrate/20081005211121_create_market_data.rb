@@ -4,10 +4,10 @@ class CreateMarketData < ActiveRecord::Migration
       t.integer :market_id, :null => false
       t.date :date, :null => false
       t.integer :volume
-      t.decimal :open, :precision => 5, :scale => 2
-      t.decimal :close, :precision => 5, :scale => 2
-      t.decimal :high, :precision => 5, :scale => 2
-      t.decimal :low, :precision => 5, :scale => 2
+      t.decimal :open, :precision => 10, :scale => 4
+      t.decimal :close, :precision => 10, :scale => 4
+      t.decimal :high, :precision => 10, :scale => 4
+      t.decimal :low, :precision => 10, :scale => 4
     end
     
     add_index :market_data, [:market_id, :date], :unique => true, :name => "market_data_market_id_date"
