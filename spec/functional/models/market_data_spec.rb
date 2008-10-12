@@ -36,6 +36,44 @@ describe MarketData do
     data[1].date.strftime.should eql('2008-01-03')
   end
   
+  it "should return next day's market data" do
+    market = MarketData.create!(:market => @market, :date => '1/1/2008', :volume => 1000, :open => 100, :close => 200, :high => 300, :low => 50)
+    MarketData.create!(:market => @market, :date => '1/2/2008', :volume => 1000, :open => 100, :close => 200, :high => 300, :low => 50)
+    MarketData.create!(:market => @market, :date => '1/3/2008', :volume => 1000, :open => 100, :close => 200, :high => 300, :low => 50)
+    
+    market.next.date.should eql(Date.parse('1/2/2008'))
+  end
+  
+  it "should return next n days' market datas" do
+    market = MarketData.create!(:market => @market, :date => '1/1/2008', :volume => 1000, :open => 100, :close => 200, :high => 300, :low => 50)
+    MarketData.create!(:market => @market, :date => '1/2/2008', :volume => 1000, :open => 100, :close => 200, :high => 300, :low => 50)
+    MarketData.create!(:market => @market, :date => '1/3/2008', :volume => 1000, :open => 100, :close => 200, :high => 300, :low => 50)
+    MarketData.create!(:market => @market, :date => '1/4/2008', :volume => 1000, :open => 100, :close => 200, :high => 300, :low => 50)
+    
+    data = market.next(2)
+    data[0].date.should eql(Date.parse('1/2/2008'))
+    data[1].date.should eql(Date.parse('1/3/2008'))
+  end
+  
+  it "should return prev day's market data" do
+    MarketData.create!(:market => @market, :date => '1/1/2008', :volume => 1000, :open => 100, :close => 200, :high => 300, :low => 50)
+    MarketData.create!(:market => @market, :date => '1/2/2008', :volume => 1000, :open => 100, :close => 200, :high => 300, :low => 50)
+    market = MarketData.create!(:market => @market, :date => '1/3/2008', :volume => 1000, :open => 100, :close => 200, :high => 300, :low => 50)
+    
+    market.prev.date.should eql(Date.parse('1/2/2008'))
+  end
+  
+  it "should return prev n days' market datas" do
+    MarketData.create!(:market => @market, :date => '1/1/2008', :volume => 1000, :open => 100, :close => 200, :high => 300, :low => 50)
+    MarketData.create!(:market => @market, :date => '1/2/2008', :volume => 1000, :open => 100, :close => 200, :high => 300, :low => 50)
+    MarketData.create!(:market => @market, :date => '1/3/2008', :volume => 1000, :open => 100, :close => 200, :high => 300, :low => 50)
+    market = MarketData.create!(:market => @market, :date => '1/4/2008', :volume => 1000, :open => 100, :close => 200, :high => 300, :low => 50)
+    
+    data = market.prev(2)
+    data[0].date.should eql(Date.parse('1/3/2008'))
+    data[1].date.should eql(Date.parse('1/2/2008'))
+  end
+  
   describe "market change" do
     before :each do
       @data = MarketData.new(:market => @market, :date => '1/4/2008', :volume => 1000, :open => 100, :close => 200, :high => 300, :low => 50)
