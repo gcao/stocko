@@ -3,4 +3,8 @@ class Stock < ActiveRecord::Base
   has_many :prices, :class_name => "StockPrice", :dependent => :destroy
   
   validates_format_of :name, :with => /^[a-z]+$/
+  
+  def to_s
+    name
+  end
 end

@@ -26,19 +26,56 @@ describe StockPrice do
   end
   
   it "should get prices between dates" do
-    stock_price = StockPrice.create!(:stock => @stock, :date => '1/1/2008', 
-      :volume => 1000, :open => 100, :close => 200, :high => 300, :low => 50)
-    stock_price = StockPrice.create!(:stock => @stock, :date => '1/2/2008', 
-      :volume => 1000, :open => 100, :close => 200, :high => 300, :low => 50)
-    stock_price = StockPrice.create!(:stock => @stock, :date => '1/3/2008', 
-      :volume => 1000, :open => 100, :close => 200, :high => 300, :low => 50)
-    stock_price = StockPrice.create!(:stock => @stock, :date => '1/4/2008', 
-      :volume => 1000, :open => 100, :close => 200, :high => 300, :low => 50)
+    StockPrice.create!(:stock => @stock, :date => '1/1/2008', :volume => 1000, :open => 100, :close => 200, :high => 300, :low => 50)
+    StockPrice.create!(:stock => @stock, :date => '1/2/2008', :volume => 1000, :open => 100, :close => 200, :high => 300, :low => 50)
+    StockPrice.create!(:stock => @stock, :date => '1/3/2008', :volume => 1000, :open => 100, :close => 200, :high => 300, :low => 50)
+    StockPrice.create!(:stock => @stock, :date => '1/4/2008', :volume => 1000, :open => 100, :close => 200, :high => 300, :low => 50)
     
     prices = Stock.find(@stock.id).prices.between('2008-1-2', '2008-01-03')
     prices.size.should eql(2)
-    prices[0].date.should eql('1/2/2008')
-    prices[1].date.should eql('1/3/2008')
+    prices[0].date.strftime.should eql('2008-01-02')
+    prices[1].date.strftime.should eql('2008-01-03')
   end
+  
+  it "should return next day's stock price" do
+    stock = StockPrice.create!(:stock => @stock, :date => '1/1/2008', :volume => 1000, :open => 100, :close => 200, :high => 300, :low => 50)
+    StockPrice.create!(:stock => @stock, :date => '1/2/2008', :volume => 1000, :open => 100, :close => 200, :high => 300, :low => 50)
+    StockPrice.create!(:stock => @stock, :date => '1/3/2008', :volume => 1000, :open => 100, :close => 200, :high => 300, :low => 50)
+    
+    stock.next.date.strftime.should eql(Date.parse('1/2/2008'))
+  end
+  
+  it "should return next n days' stock prices" do
+    stock = StockPrice.create!(:stock => @stock, :date => '1/1/2008', :volume => 1000, :open => 100, :close => 200, :high => 300, :low => 50)
+    StockPrice.create!(:stock => @stock, :date => '1/2/2008', :volume => 1000, :open => 100, :close => 200, :high => 300, :low => 50)
+    StockPrice.create!(:stock => @stock, :date => '1/3/2008', :volume => 1000, :open => 100, :close => 200, :high => 300, :low => 50)
+    
+    prices = stock.next(2)
+    prices[0].date.strftime.should eql(Date.parse('1/2/2008'))
+    prices[1].date.strftime.should eql(Date.parse('1/3/2008'))
+  end
+  
+  describe "price change" do
+    before :each do
+      @price = StockPrice.new(:stock => @stock, :date => '1/4/2008', :volume => 1000, :open => 100, :close => 200, :high => 300, :low => 50)
+    end
+    
+    it "up?" do
+      @price.up?.should be_true
+    end
+    
+    it "down?" do
+      @price.down?.should be_false
+    end
+    
+    it "change" do
+      @price.change.should eql(BigDecimal.new('1'))
+    end
+    
+    it "max_change" do
+      @price.max_change.should eql(BigDecimal.new('2.5'))
+    end
+  end
+
 end
 

@@ -1,4 +1,6 @@
 class StockPrice < ActiveRecord::Base
+  include Change
+  
   belongs_to :stock
   
   named_scope :between, lambda{ |from, to|

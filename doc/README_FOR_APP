@@ -17,3 +17,18 @@ Install pg gem
 
 sudo bash
 export ARCHFLAGS='-arch i386'; gem install pg
+
+
+StockPrice, MarketData, Array(of stock price or market data) custom methods
+up? <=> close > open
+down? <=> close < open
+change <=> (close - open)/open
+max_change <=> (high - low)/open
+next(days = 1) <=> StockPrice of next 1 or N days
+prev(days = 1) <=> StockPrice of prev 1 or N days
+
+Array(of stock price or market data) custom methods
+volume(average), high, low, open, close, start_date, end_date 
+stock_array?
+stock_price_array?
+market_data_array?

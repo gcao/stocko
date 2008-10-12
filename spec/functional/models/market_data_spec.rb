@@ -23,5 +23,39 @@ describe MarketData do
     data.high.should eql(BigDecimal.new('10300'))
     data.low.should eql(BigDecimal.new('10050'))
   end
+  
+  it "should get data between dates" do
+    MarketData.create!(:market => @market, :date => '1/1/2008', :volume => 1000, :open => 100, :close => 200, :high => 300, :low => 50)
+    MarketData.create!(:market => @market, :date => '1/2/2008', :volume => 1000, :open => 100, :close => 200, :high => 300, :low => 50)
+    MarketData.create!(:market => @market, :date => '1/3/2008', :volume => 1000, :open => 100, :close => 200, :high => 300, :low => 50)
+    MarketData.create!(:market => @market, :date => '1/4/2008', :volume => 1000, :open => 100, :close => 200, :high => 300, :low => 50)
+    
+    data = Market.find(@market.id).data.between('2008-1-2', '2008-01-03')
+    data.size.should eql(2)
+    data[0].date.strftime.should eql('2008-01-02')
+    data[1].date.strftime.should eql('2008-01-03')
+  end
+  
+  describe "market change" do
+    before :each do
+      @data = MarketData.new(:market => @market, :date => '1/4/2008', :volume => 1000, :open => 100, :close => 200, :high => 300, :low => 50)
+    end
+    
+    it "up?" do
+      @data.up?.should be_true
+    end
+    
+    it "down?" do
+      @data.down?.should be_false
+    end
+    
+    it "change" do
+      @data.change.should eql(BigDecimal.new('1'))
+    end
+    
+    it "max_change" do
+      @data.max_change.should eql(BigDecimal.new('2.5'))
+    end
+  end
 
 end
