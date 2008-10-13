@@ -7,4 +7,17 @@ class Stock < ActiveRecord::Base
   def to_s
     name
   end
+  
+  def self.method_missing name, *args
+    return super if name.to_s[0..3] == 'find'
+      
+    if stock = find_by_name(name.to_s)
+      define_method name do
+        stock 
+      end
+      stock
+    else
+      super
+    end
+  end
 end

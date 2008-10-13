@@ -32,3 +32,5 @@ volume(average), high, low, open, close, start_date, end_date
 stock_array?
 stock_price_array?
 market_data_array?
+
+Add stock names as class methods to Stock, e.g. Stock.ibm

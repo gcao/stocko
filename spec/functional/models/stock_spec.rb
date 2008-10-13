@@ -36,7 +36,6 @@ describe Stock do
 
     it "can have n prices" do
       stock = Stock.create!(:market => @market, :name => 'stock', :description => 'a_description')
-      stock.save
       StockPrice.create!(:stock => stock, :date => '1/1/2008')
       StockPrice.create!(:stock => stock, :date => '1/2/2008')
       prices = Stock.find(stock.id).prices
@@ -45,4 +44,10 @@ describe Stock do
     end
 
   end
+  
+  it "class methods returns named stock objects" do
+    stock = Stock.create!(:market => @market, :name => 'xxx', :description => 'a_description')
+    Stock.xxx.name.should eql('xxx')
+    Stock.xxx.description.should eql('a_description')
+  end 
 end

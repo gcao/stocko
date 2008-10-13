@@ -74,26 +74,7 @@ describe MarketData do
     data[1].date.should eql(Date.parse('1/2/2008'))
   end
   
-  describe "market change" do
-    before :each do
-      @data = MarketData.new(:market => @market, :date => '1/4/2008', :volume => 1000, :open => 100, :close => 200, :high => 300, :low => 50)
-    end
-    
-    it "up?" do
-      @data.up?.should be_true
-    end
-    
-    it "down?" do
-      @data.down?.should be_false
-    end
-    
-    it "change" do
-      @data.change.should eql(BigDecimal.new('1'))
-    end
-    
-    it "max_change" do
-      @data.max_change.should eql(BigDecimal.new('2.5'))
-    end
+  it "should include Change module" do
+    MarketData.included_modules.should include(Change)
   end
-
 end

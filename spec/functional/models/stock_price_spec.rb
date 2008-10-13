@@ -75,27 +75,8 @@ describe StockPrice do
     prices[1].date.should eql(Date.parse('1/2/2008'))
   end
   
-  describe "price change" do
-    before :each do
-      @price = StockPrice.new(:stock => @stock, :date => '1/4/2008', :volume => 1000, :open => 100, :close => 200, :high => 300, :low => 50)
-    end
-    
-    it "up?" do
-      @price.up?.should be_true
-    end
-    
-    it "down?" do
-      @price.down?.should be_false
-    end
-    
-    it "change" do
-      @price.change.should eql(BigDecimal.new('1'))
-    end
-    
-    it "max_change" do
-      @price.max_change.should eql(BigDecimal.new('2.5'))
-    end
+  it "should include Change module" do
+    StockPrice.included_modules.should include(Change)
   end
-
 end
 
