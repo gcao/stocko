@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081005211121) do
+ActiveRecord::Schema.define(:version => 20081017031241) do
 
   create_table "market_data", :force => true do |t|
     t.integer "market_id",                                :null => false
@@ -22,6 +22,18 @@ ActiveRecord::Schema.define(:version => 20081005211121) do
   end
 
   add_index "market_data", ["date", "market_id"], :name => "market_data_market_id_date", :unique => true
+
+  create_table "market_dates", :force => true do |t|
+    t.date    "date",           :null => false
+    t.integer "prev_id"
+    t.integer "next_id"
+    t.integer "year"
+    t.integer "month"
+    t.boolean "first_of_month"
+    t.boolean "last_of_month"
+  end
+
+  add_index "market_dates", ["date"], :name => "market_dates_date", :unique => true
 
   create_table "markets", :force => true do |t|
     t.string "name"

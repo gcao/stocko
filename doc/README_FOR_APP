@@ -34,3 +34,14 @@ stock_price_array?
 market_data_array?
 
 Add stock names as class methods to Stock, e.g. Stock.ibm
+
+Alias S to Stock, M to Market # may be a bad idea. the API should be as readable as possible, e.g. Stock.ibm is better than S.ibm
+
+Delegate volume, open, close, high, low etc to stock.prices or market.data
+
+stock.change_between(from, to, days=1)
+stock.change_less_than(value, days=1) # absolute change is less than value
+stock.change_greater_than(value, days=1) # absolute change is greater than value
+array of (array of consecutive stock prices)
+
+Check how irb and script/console is implemented, we probably can plug in a context object?!
