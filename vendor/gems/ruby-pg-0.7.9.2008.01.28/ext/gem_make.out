@@ -1,0 +1,137 @@
+/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/bin/ruby extconf.rb install ruby-pg
+
+		===========   WARNING   ===========
+		
+		You are building this extension on OS X without setting the 
+		ARCHFLAGS environment variable, and PostgreSQL does not appear 
+		to have been built as a universal binary. If you are seeing this 
+		message, that means that the build will probably fail.
+
+		Try setting the environment variable ARCHFLAGS 
+		to '-arch i386' before building.
+
+		For example:
+		(in bash) $ export ARCHFLAGS='-arch i386'
+		(in tcsh) % setenv ARCHFLAGS '-arch i386'
+
+		Then try building again.
+
+		===================================
+		checking for main() in -lpq... yes
+checking for libpq-fe.h... yes
+checking for libpq/libpq-fs.h... yes
+checking for PQconnectionUsedPassword()... no
+checking for PQisthreadsafe()... no
+checking for PQprepare()... no
+checking for PQexecParams()... no
+checking for PQescapeString()... no
+checking for PQescapeStringConn()... no
+checking for lo_create()... no
+checking for pg_encoding_to_char()... no
+checking for PQsetClientEncoding()... no
+creating Makefile
+
+make
+gcc -I. -I. -I/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/universal-darwin9.0 -I. -DHAVE_LIBPQ_FE_H -DHAVE_LIBPQ_LIBPQ_FS_H -I/usr/local/include  -fno-common -arch ppc -arch i386 -Os -pipe -fno-common  -c compat.c
+In file included from compat.c:16In file included from compat.c:16:
+:
+compat.h:38:2:compat.h:38:2:  error: #error error: #error PostgreSQL Pcolsitegnrte SvQeLrs icolni etnoto  voelrds,i onr etoo old, requires 7.3 or later.
+quires 7.3 or later.
+In file included from compat.c:16:
+compat.h:69: error: conflicting types for ‘PQconnectionNeedsPassword’
+/usr/local/include/libpq-fe.h:266: error: previous declaration of ‘PQconnectionNeedsPassword’ was here
+compat.h:70: error: conflicting types for ‘PQconnectionUsedPassword’
+/usr/local/include/libpq-fe.h:267: error: previous declaration of ‘PQconnectionUsedPassword’ was hereIn file included from compat.c:16:
+compat.h:69: error: conflicting types for ‘PQconnectionNeedsPassword’
+
+/usr/local/include/libpq-fe.h:266: error: previous declaration of ‘PQconnectionNeedsPassword’ was here
+compat.h:70: error: conflicting types for ‘PQconnectionUsedPassword’
+/usr/local/include/libpq-fe.h:267: error: previous declaration of ‘PQconnectionUsedPassword’ was here
+compat.h:123: error: redeclaration of enumerator ‘PQERRORS_TERSE’
+/usr/local/include/libpq-fe.h:97: error: previous definition of ‘PQERRORS_TERSE’ was here
+compat.h:123: error: redeclaration of enumerator ‘PQERRORS_TERSE’
+compat.h:124: error: redeclaration of enumerator ‘PQERRORS_DEFAULT’
+/usr/local/include/libpq-fe.h:97: error: previous definition of ‘PQERRORS_TERSE’ was here
+/usr/local/include/libpq-fe.h:98: error: previous definition of ‘PQERRORS_DEFAULT’ was here
+compat.h:124: error: redeclaration of enumerator ‘PQERRORS_DEFAULT’
+compat.h:126: error: redeclaration of enumerator ‘PQERRORS_VERBOSE’
+/usr/local/include/libpq-fe.h:98: error: previous definition of ‘PQERRORS_DEFAULT’ was here
+/usr/local/include/libpq-fe.h:100: error: previous definition of ‘PQERRORS_VERBOSE’ was here
+compat.h:126: error: redeclaration of enumerator ‘PQERRORS_VERBOSE’
+compat.h:126: error: conflicting types for ‘PGVerbosity’
+/usr/local/include/libpq-fe.h:100: error: previous declaration of ‘PGVerbosity’ was here
+/usr/local/include/libpq-fe.h:100: error: previous definition of ‘PQERRORS_VERBOSE’ was here
+compat.h:130: error: redeclaration of enumerator ‘PQTRANS_IDLE’
+/usr/local/include/libpq-fe.h:88: error: previous definition of ‘PQTRANS_IDLE’ was here
+compat.h:126: error: conflicting types for ‘PGVerbosity’
+compat.h:131: error: redeclaration of enumerator ‘PQTRANS_ACTIVE’
+/usr/local/include/libpq-fe.h:100: error: previous declaration of ‘PGVerbosity’ was here
+/usr/local/include/libpq-fe.h:89: error: previous definition of ‘PQTRANS_ACTIVE’ was here
+compat.h:130: error: redeclaration of enumerator ‘PQTRANS_IDLE’compat.h:132: error: redeclaration of enumerator ‘PQTRANS_INTRANS’
+
+/usr/local/include/libpq-fe.h:88: error: previous definition of ‘PQTRANS_IDLE’ was here/usr/local/include/libpq-fe.h:90: error: previous definition of ‘PQTRANS_INTRANS’ was here
+
+compat.h:131: error: redeclaration of enumerator ‘PQTRANS_ACTIVE’compat.h:133: error: redeclaration of enumerator ‘PQTRANS_INERROR’
+
+/usr/local/include/libpq-fe.h:89: error: previous definition of ‘PQTRANS_ACTIVE’ was here/usr/local/include/libpq-fe.h:91: error: previous definition of ‘PQTRANS_INERROR’ was here
+
+compat.h:132: error: redeclaration of enumerator ‘PQTRANS_INTRANS’compat.h:135: error: redeclaration of enumerator ‘PQTRANS_UNKNOWN’
+
+/usr/local/include/libpq-fe.h:90: error: previous definition of ‘PQTRANS_INTRANS’ was here/usr/local/include/libpq-fe.h:93: error: previous definition of ‘PQTRANS_UNKNOWN’ was here
+
+compat.h:133: error: redeclaration of enumerator ‘PQTRANS_INERROR’
+compat.h:135: error: conflicting types for ‘PGTransactionStatusType’/usr/local/include/libpq-fe.h:91: error: previous definition of ‘PQTRANS_INERROR’ was here
+
+/usr/local/include/libpq-fe.h:93: error: previous declaration of ‘PGTransactionStatusType’ was here
+compat.h:135: error: redeclaration of enumerator ‘PQTRANS_UNKNOWN’
+/usr/local/include/libpq-fe.h:93: error: previous definition of ‘PQTRANS_UNKNOWN’ was here
+compat.h:135: error: conflicting types for ‘PGTransactionStatusType’
+/usr/local/include/libpq-fe.h:93: error: previous declaration of ‘PGTransactionStatusType’ was herecompat.h:140: error: conflicting types for ‘PQtransactionStatus’
+compat.h:140: error: conflicting types for ‘PQtransactionStatus’
+/usr/local/include/libpq-fe.h:258: error: previous declaration of ‘PQtransactionStatus’ was here
+compat.h:141: error: conflicting types for ‘PQparameterStatus’
+/usr/local/include/libpq-fe.h:260: error: previous declaration of ‘PQparameterStatus’ was here
+compat.h:155: error: conflicting types for ‘PQsetErrorVerbosity’
+/usr/local/include/libpq-fe.h:279: error: previous declaration of ‘PQsetErrorVerbosity’ was here
+
+compat.h:165:2: error: #error unsupported postgresql version, requires 7.3 or later.
+/usr/local/include/libpq-fe.h:258: error: previous declaration of ‘PQtransactionStatus’ was here
+compat.h:141: error: conflicting types for ‘PQparameterStatus’
+/usr/local/include/libpq-fe.h:260: error: previous declaration of ‘PQparameterStatus’ was here
+compat.c: In function ‘PQsetClientEncoding’:
+compat.c:21: error: syntax error before ‘{’ token
+compat.h:155: error: conflicting types for ‘PQsetErrorVerbosity’
+/usr/local/include/libpq-fe.h:279: error: previous declaration of ‘PQsetErrorVerbosity’ was here
+compat.h:165:2: error: #error unsupported postgresql version, requires 7.3 or later.
+compat.c:270: error: storage class specified for parameter ‘query’
+compat.c: In function ‘PQsetClientEncoding’:
+compat.c:270: error: parameter ‘query’ is initializedcompat.c:21: error: syntax error before ‘{’ token
+
+compat.c:274: error: syntax error before ‘if’
+compat.c:329: error: parameter ‘target’ is initialized
+compat.c:329: error: ‘to’ undeclared (first use in this function)
+compat.c:329: error: (Each undeclared identifier is reported only once
+compat.c:329: error: for each function it appears in.)
+compat.c:330: error: parameter ‘remaining’ is initialized
+compat.c:330: error: ‘length’ undeclared (first use in this function)
+compat.c:332: error: syntax error before ‘while’
+compat.c:384: error: syntax error before ‘len’
+compat.c:458: error: redefinition of parameter ‘i’
+compat.c:378: error: previous definition of ‘i’ was here
+compat.c:270: error: storage class specified for parameter ‘query’compat.c:461: error: syntax error before ‘if’
+
+compat.c:270: error: parameter ‘query’ is initialized
+compat.c:274: error: syntax error before ‘if’
+compat.c:329: error: parameter ‘target’ is initialized
+compat.c:329: error: ‘to’ undeclared (first use in this function)
+compat.c:329: error: (Each undeclared identifier is reported only once
+compat.c:329: error: for each function it appears in.)
+compat.c:330: error: parameter ‘remaining’ is initialized
+compat.c:330: error: ‘length’ undeclared (first use in this function)
+compat.c:332: error: syntax error before ‘while’
+compat.c:384: error: syntax error before ‘len’
+compat.c:458: error: redefinition of parameter ‘i’
+compat.c:378: error: previous definition of ‘i’ was here
+compat.c:461: error: syntax error before ‘if’
+lipo: can't open input file: /var/tmp//ccNeHqGt.out (No such file or directory)
+make: *** [compat.o] Error 1
