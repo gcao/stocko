@@ -8,6 +8,8 @@ describe Change do
       def close; BigDecimal.new('150'); end
       def high; BigDecimal.new('200'); end
       def low; BigDecimal.new('50'); end
+      def change; BigDecimal.new('0.5'); end
+      def max_change; BigDecimal.new('1.5'); end
     end
     
     @obj = klass.new
@@ -19,13 +21,5 @@ describe Change do
   
   it "down?" do
     @obj.down?.should be_false
-  end
-  
-  it "change" do
-    @obj.change.should eql(BigDecimal.new('0.5'))
-  end
-  
-  it "max_change" do
-    @obj.max_change.should eql(BigDecimal.new('1.5'))
   end
 end

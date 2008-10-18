@@ -49,5 +49,5 @@ describe Stock do
     stock = Stock.create!(:market => @market, :name => 'xxx', :description => 'a_description')
     Stock.xxx.name.should eql('xxx')
     Stock.xxx.description.should eql('a_description')
-  end 
+  end
 end

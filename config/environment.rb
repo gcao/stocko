@@ -68,5 +68,3 @@ Rails::Initializer.run do |config|
   config.gem "rspec-rails", :lib => "spec" 
   config.gem "ar-extensions"
 end
-
-require RAILS_ROOT + '/app/mixins/array.rb'

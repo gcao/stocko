@@ -6,15 +6,10 @@ describe StockPrice do
     @stock = Stock.create!(:market => @market, :name => :stock)
   end
 
-  it "should have date, volume, open, close, high, low" do
-    stock_price = StockPrice.create!(
-      :stock => @stock,
-      :date => '1/1/2008',
-      :volume => 1000,
-      :open => 100,
-      :close => 200,
-      :high => 300,
-      :low => 50)
+  it "should have date, volume, open, close, high, low, change, max_change" do
+    stock_price = StockPrice.create!(:stock => @stock,
+      :date => '1/1/2008', :volume => 1000, :open => 100, :close => 200,
+      :high => 300, :low => 50, :change => 1, :max_change => 2.5)
     price = StockPrice.find(stock_price.id)
     price.stock.should eql(@stock)
     price.date.strftime.should eql('2008-01-01')
@@ -23,6 +18,8 @@ describe StockPrice do
     price.close.should eql(BigDecimal.new('200'))
     price.high.should eql(BigDecimal.new('300'))
     price.low.should eql(BigDecimal.new('50'))
+    price.change.should eql(BigDecimal.new('1'))
+    price.max_change.should eql(BigDecimal.new('2.5'))
   end
   
   it "should get prices between dates" do
@@ -35,6 +32,33 @@ describe StockPrice do
     prices.size.should eql(2)
     prices[0].date.should eql(Date.parse('2008-01-02'))
     prices[1].date.should eql(Date.parse('2008-01-03'))
+  end
+  
+  describe 'change_between' do
+    before :each do
+      StockPrice.create!(:stock => @stock, :date => '1/1/2008', :change => 0.1)
+      StockPrice.create!(:stock => @stock, :date => '1/2/2008', :change => 0.2)
+      StockPrice.create!(:stock => @stock, :date => '1/3/2008', :change => 0)
+      StockPrice.create!(:stock => @stock, :date => '1/4/2008', :change => 0.1)
+    end      
+
+    it "should get prices whose changes are between low and high" do
+      prices = Stock.find(@stock.id).prices.change_between(0.1, 0.2)
+      prices.size.should eql(3)
+    end
+  end
+  
+  it "should group prices by dates" do
+    date_loader = Stocko::Db::MarketDateLoader.new
+    date_loader.append('1/2/2008')
+    date_loader.append('1/3/2008')
+    date_loader.append('1/4/2008')
+    date_loader.append('1/5/2008')
+    StockPrice.create!(:stock => @stock, :date => '1/2/2008')
+    StockPrice.create!(:stock => @stock, :date => '1/3/2008')
+    StockPrice.create!(:stock => @stock, :date => '1/5/2008')
+    prices = StockPrice.all
+    prices.group_by_date.size.should eql(2)
   end
   
   it "should return next day's stock price" do
