@@ -77,4 +77,12 @@ describe MarketData do
   it "should include Change module" do
     MarketData.included_modules.should include(Change)
   end
+  
+  it "should include ModelWithDate module" do
+    MarketData.included_modules.should include(ModelWithDate)
+  end
+  
+  it "should include ModelWithChange module" do
+    MarketData.included_modules.should include(ModelWithChange)
+  end
 end

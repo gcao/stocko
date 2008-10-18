@@ -28,7 +28,7 @@ describe StockPrice do
     StockPrice.create!(:stock => @stock, :date => '1/3/2008', :volume => 1000, :open => 100, :close => 200, :high => 300, :low => 50)
     StockPrice.create!(:stock => @stock, :date => '1/4/2008', :volume => 1000, :open => 100, :close => 200, :high => 300, :low => 50)
     
-    prices = Stock.find(@stock.id).prices.between('2008-1-2', '2008-01-03')
+    prices = StockPrice.between('2008-1-2', '2008-1-3')
     prices.size.should eql(2)
     prices[0].date.should eql(Date.parse('2008-01-02'))
     prices[1].date.should eql(Date.parse('2008-01-03'))
@@ -46,19 +46,6 @@ describe StockPrice do
       prices = Stock.find(@stock.id).prices.change_between(0.1, 0.2)
       prices.size.should eql(3)
     end
-  end
-  
-  it "should group prices by dates" do
-    date_loader = Stocko::Db::MarketDateLoader.new
-    date_loader.append('1/2/2008')
-    date_loader.append('1/3/2008')
-    date_loader.append('1/4/2008')
-    date_loader.append('1/5/2008')
-    StockPrice.create!(:stock => @stock, :date => '1/2/2008')
-    StockPrice.create!(:stock => @stock, :date => '1/3/2008')
-    StockPrice.create!(:stock => @stock, :date => '1/5/2008')
-    prices = StockPrice.all
-    prices.group_by_date.size.should eql(2)
   end
   
   it "should return next day's stock price" do
@@ -101,6 +88,14 @@ describe StockPrice do
   
   it "should include Change module" do
     StockPrice.included_modules.should include(Change)
+  end
+  
+  it "should include ModelWithDate module" do
+    StockPrice.included_modules.should include(ModelWithDate)
+  end
+  
+  it "should include ModelWithChange module" do
+    StockPrice.included_modules.should include(ModelWithChange)
   end
 end
 

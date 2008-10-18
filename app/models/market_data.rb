@@ -1,13 +1,12 @@
 class MarketData < ActiveRecord::Base
   include Change
+  include ModelWithDate
+  include ModelWithChange
   
   set_table_name "market_data"
   
   belongs_to :market
   
-  named_scope :between, lambda{ |from, to|
-    {:conditions => ['date >= ? and date <= ?', Date.parse(from), Date.parse(to)]} }
-    
   def next n=1
     if n == 1
       MarketData.find(:first, :conditions => ["market_id = ? and date > ?", market.id, date])

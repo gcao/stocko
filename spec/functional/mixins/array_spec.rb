@@ -157,7 +157,37 @@ describe RAILS_ROOT + '/app/mixins/array.rb' do
         groups[0][1].date.should eql(Date.parse('1/3/2008'))
         groups[1].size.should eql(1)
         groups[1][0].date.should eql(Date.parse('1/5/2008'))
-        
+      end
+    end
+
+    describe "array of market data" do
+      before :each do
+        @market = Market.create!(:name => 'market')
+      end
+      
+      it "return self if there is only one group" do
+        array = [] 
+        array << MarketData.create!(:market => @market, :date => '1/2/2008')
+        array << MarketData.create!(:market => @market, :date => '1/3/2008')
+        array << MarketData.create!(:market => @market, :date => '1/4/2008')
+
+        groups = MarketData.all.group_by_date
+        groups.should eql(array)
+      end
+
+      it "return multiple groups" do
+        array = [] 
+        array << MarketData.create!(:market => @market, :date => '1/2/2008')
+        array << MarketData.create!(:market => @market, :date => '1/3/2008')
+        array << MarketData.create!(:market => @market, :date => '1/5/2008')
+
+        groups = MarketData.all.group_by_date
+        groups.size.should eql(2)
+        groups[0].size.should eql(2)
+        groups[0][0].date.should eql(Date.parse('1/2/2008'))
+        groups[0][1].date.should eql(Date.parse('1/3/2008'))
+        groups[1].size.should eql(1)
+        groups[1][0].date.should eql(Date.parse('1/5/2008'))
       end
     end
   end
