@@ -27,7 +27,7 @@ describe RAILS_ROOT + '/app/mixins/array.rb' do
       @array.array_of_stock_prices?.should_not be_true
     end
 
-    [:volume, :open, :close, :high, :low, :start_date, :end_date].each do |method|
+    [:volume, :open, :close, :high, :low, :change, :max_change, :start_date, :end_date].each do |method|
       it "should raise error on #{method}" do
         begin
           @array.send(method)
@@ -95,6 +95,14 @@ describe RAILS_ROOT + '/app/mixins/array.rb' do
     
     it "returns low of all days" do
       @array.low.should eql(50)
+    end
+    
+    it "returns change" do
+      @array.change.should eql(BigDecimal.new('1.2'))
+    end
+    
+    it "returns max change" do
+      @array.max_change.should eql(BigDecimal.new('2.8'))
     end
     
     it "returns first date" do

@@ -38,7 +38,7 @@ market_data_array?
 
 ! Alias S to Stock, M to Market # may be a bad idea. the API should be as readable as possible, e.g. Stock.ibm is better than S.ibm
 
-Delegate volume, open, close, high, low etc to stock.prices or market.data
+! Delegate array#volume, open, close, high, low etc to stock.prices or market.data
 
 stock.change_between(from, to, days=1)
 stock.change_less_than(value, days=1) # absolute change is less than value

@@ -60,6 +60,14 @@ module ArrayExtensions
     end
   end
 
+  def change
+    close/open - 1
+  end
+  
+  def max_change
+    (high - low)/open
+  end
+
   def start_date
     if array_of_market_data_or_stock_prices?
       first.date
