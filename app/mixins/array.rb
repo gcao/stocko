@@ -1,5 +1,11 @@
 module ArrayExtensions
   include Change
+  
+  attr_writer :grouped
+    
+  def array_of_array?
+    empty? or first.is_a? Array
+  end
 
   def array_of_stocks?
     empty? or first.is_a? Stock
@@ -68,6 +74,46 @@ module ArrayExtensions
     else
       raise NotImplementedError, "end_date is not implemented on array of #{first.class}"
     end
+  end
+  
+  def group_by_date
+    return self if grouped?
+    
+    if empty? or size == 1
+      grouped = true
+      return self
+    end
+    
+    result = []
+    result.grouped = true
+    
+    last_group = []
+    last_group.grouped = true
+    last_elem = nil
+    each do |elem|
+      if last_elem
+        if last_elem.date.next_date == elem.date
+          last_group << elem
+        else
+          result << last_group
+          last_group = [elem]
+          last_group.grouped = true
+        end
+      else
+        last_group << elem
+      end
+
+      last_elem = elem
+    end
+    
+    result << last_group unless last_group.empty?
+    
+    return result[0] if result.size == 1
+    result
+  end
+  
+  def grouped?
+    @grouped
   end
 
   private

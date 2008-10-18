@@ -1,6 +1,7 @@
 Use this README file to introduce your application and point to useful places in the API for learning more.
 Run "rake doc:app" to generate API documentation for your models, controllers, helpers, and libraries.
 
+++++++++++++++++++++++++++++++++++++++++++++++
 Postgres Notes
 
 add these to database.yml
@@ -17,9 +18,9 @@ Install pg gem
 
 sudo bash
 export ARCHFLAGS='-arch i386'; gem install pg
+_____________________________________________
 
-
-StockPrice, MarketData, Array(of stock price or market data) custom methods
+! StockPrice, MarketData, Array(of stock price or market data) custom methods
 up? <=> close > open
 down? <=> close < open
 change <=> (close - open)/open
@@ -27,15 +28,15 @@ max_change <=> (high - low)/open
 next(days = 1) <=> StockPrice of next 1 or N days
 prev(days = 1) <=> StockPrice of prev 1 or N days
 
-Array(of stock price or market data) custom methods
+! Array(of stock price or market data) custom methods
 volume(average), high, low, open, close, start_date, end_date 
 stock_array?
 stock_price_array?
 market_data_array?
 
-Add stock names as class methods to Stock, e.g. Stock.ibm
+! Add stock names as class methods to Stock, e.g. Stock.ibm
 
-Alias S to Stock, M to Market # may be a bad idea. the API should be as readable as possible, e.g. Stock.ibm is better than S.ibm
+! Alias S to Stock, M to Market # may be a bad idea. the API should be as readable as possible, e.g. Stock.ibm is better than S.ibm
 
 Delegate volume, open, close, high, low etc to stock.prices or market.data
 
@@ -45,3 +46,4 @@ stock.change_greater_than(value, days=1) # absolute change is greater than value
 array of (array of consecutive stock prices)
 
 Check how irb and script/console is implemented, we probably can plug in a context object?!
+

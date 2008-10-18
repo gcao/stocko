@@ -104,6 +104,61 @@ describe RAILS_ROOT + '/app/mixins/array.rb' do
     it "returns end date" do
       @array.end_date.should eql(Date.parse('1/3/2008'))
     end
+  end
+
+  describe "group_by_date" do
+    before :each do
+      date_loader = Stocko::Db::MarketDateLoader.new
+      date_loader.append('1/1/2008')
+      date_loader.append('1/2/2008')
+      date_loader.append('1/3/2008')
+      date_loader.append('1/4/2008')
+      date_loader.append('1/5/2008')
+    end
     
+    it "empty array returns self" do
+      [].group_by_date.should eql([])
+    end
+    
+    it "array with one element returns self" do
+      [1].group_by_date.should eql([1])
+    end
+
+    describe "array of stock prices" do
+      before :each do
+        market = Market.create!(:name => 'market')
+        @stock = Stock.create!(:market => market, :name => 'stock')
+      end
+      
+      it "return self if there is only one group" do
+        array = [] 
+        array << StockPrice.create!(:stock => @stock, :date => '1/2/2008')
+        array << StockPrice.create!(:stock => @stock, :date => '1/3/2008')
+        array << StockPrice.create!(:stock => @stock, :date => '1/4/2008')
+
+        prices = StockPrice.all
+
+        groups = prices.group_by_date
+        groups.should eql(array)
+      end
+
+      it "return multiple groups" do
+        array = [] 
+        array << StockPrice.create!(:stock => @stock, :date => '1/2/2008')
+        array << StockPrice.create!(:stock => @stock, :date => '1/3/2008')
+        array << StockPrice.create!(:stock => @stock, :date => '1/5/2008')
+
+        prices = StockPrice.all
+
+        groups = prices.group_by_date
+        groups.size.should eql(2)
+        groups[0].size.should eql(2)
+        groups[0][0].date.should eql(Date.parse('1/2/2008'))
+        groups[0][1].date.should eql(Date.parse('1/3/2008'))
+        groups[1].size.should eql(1)
+        groups[1][0].date.should eql(Date.parse('1/5/2008'))
+        
+      end
+    end
   end
 end
