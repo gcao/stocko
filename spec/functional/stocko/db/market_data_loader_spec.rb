@@ -23,6 +23,9 @@ module Stocko
         market.data[1].close.should eql(BigDecimal.new('10287.1'))
         market.data[1].high.should eql(BigDecimal.new('10369.55'))
         market.data[1].low.should eql(BigDecimal.new('10218.09'))
+        
+        dates = MarketDate.all
+        dates.size.should eql(2)
       end
       
       it "should skip duplicate line (has same date as previous line)" do

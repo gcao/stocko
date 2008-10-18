@@ -4,6 +4,8 @@ module Stocko
       def self.load_from_file file, market, options = {:skip_lines => 0}
         columns = [:market_id, :date, :volume, :high, :low, :open, :close]
         values = []
+        
+        date_loader = MarketDateLoader.new
 
         skip_lines = options[:skip_lines]
         line_no = 0
@@ -20,6 +22,8 @@ module Stocko
           converted_date = date.clone
           converted_date.insert(6, '20') if converted_date =~ %r(^\d+/\d+/\d\d$)
           values << [market.id, converted_date, row[2], row[3], row[4], row[5], row[6]]
+          
+          date_loader.append(converted_date)
         end
         
         MarketData.import columns, values, :validate => false
