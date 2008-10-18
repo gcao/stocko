@@ -8,11 +8,13 @@ class CreateStockPrices < ActiveRecord::Migration
       t.decimal :close, :precision => 8, :scale => 4
       t.decimal :high, :precision => 8, :scale => 4
       t.decimal :low, :precision => 8, :scale => 4
-      t.decimal :change, :precision => 4, :scale => 4
-      t.decimal :max_change, :precision => 4, :scale => 4
+      t.decimal :change, :precision => 6, :scale => 4
+      t.decimal :max_change, :precision => 6, :scale => 4
+      t.decimal :prev_close, :precision => 8, :scale => 4
     end
     
     add_index :stock_prices, [:stock_id, :date], :unique => true, :name => "stock_prices_stock_id_date"
+    add_index :stock_prices, [:volume], :name => "stock_prices_volume"
     add_index :stock_prices, [:high], :name => "stock_prices_high"
     add_index :stock_prices, [:low], :name => "stock_prices_low"
     add_index :stock_prices, [:change], :name => "stock_prices_change"

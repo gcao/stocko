@@ -5,15 +5,9 @@ describe MarketData do
     @market = Market.create!(:name => :a_market)
   end
 
-  it "should have date, open, close, high, low" do
-    market_data = MarketData.create!(
-      :market => @market,
-      :date => '1/1/2008',
-      :volume => 1000,
-      :open => 10000,
-      :close => 10200,
-      :high => 10300,
-      :low => 10050)
+  it "should have date, open, close, high, low, change, max_change" do
+    market_data = MarketData.create!(:market => @market, :date => '1/1/2008', :volume => 1000,
+      :open => 10000, :close => 10200, :high => 10300, :low => 10050, :change => 0.2, :max_change => 0.5)
     data = MarketData.find(market_data.id)
     data.market.should eql(@market)
     data.date.strftime.should eql('2008-01-01')
@@ -22,6 +16,8 @@ describe MarketData do
     data.close.should eql(BigDecimal.new('10200'))
     data.high.should eql(BigDecimal.new('10300'))
     data.low.should eql(BigDecimal.new('10050'))
+    data.change.should eql(BigDecimal.new('0.2'))
+    data.max_change.should eql(BigDecimal.new('0.5'))
   end
   
   it "should get data between dates" do

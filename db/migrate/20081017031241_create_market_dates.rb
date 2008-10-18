@@ -11,6 +11,8 @@ class CreateMarketDates < ActiveRecord::Migration
     end
     
     add_index :market_dates, :date, :unique => true, :name => "market_dates_date"
+    add_index :market_dates, :year, :name => "market_dates_year"
+    add_index :market_dates, :month, :name => "market_dates_month"
   end
 
   def self.down

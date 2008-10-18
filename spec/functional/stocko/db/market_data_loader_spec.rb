@@ -17,12 +17,17 @@ module Stocko
         market.data[0].close.should eql(BigDecimal.new('10317.36'))
         market.data[0].high.should eql(BigDecimal.new('10438.47'))
         market.data[0].low.should eql(BigDecimal.new('10316.16'))
+        market.data[0].change.should < 0
+        market.data[0].max_change.should > 0
+        market.data[0].prev_close.should eql(BigDecimal.new('10434.81'))
+        
         market.data[1].date.should eql(Date.parse('2005-10-06'))
         market.data[1].volume.should eql(2000)
         market.data[1].open.should eql(BigDecimal.new('10317.36'))
         market.data[1].close.should eql(BigDecimal.new('10287.1'))
         market.data[1].high.should eql(BigDecimal.new('10369.55'))
         market.data[1].low.should eql(BigDecimal.new('10218.09'))
+        market.data[1].prev_close.should eql(BigDecimal.new('10317.36'))
         
         dates = MarketDate.all
         dates.size.should eql(2)
