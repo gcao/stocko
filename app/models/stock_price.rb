@@ -22,4 +22,8 @@ class StockPrice < ActiveRecord::Base
         :order => "date desc", :limit => n)
     end
   end
+  
+  def to_s
+    sprintf("#{date}  %10s  %6.2f  %6.2f  %6.2f  %6.2f  %8.2f%%  %8.2f%%", volume.to_s.commify, open, close, high, low, change*100, max_change*100)
+  end
 end

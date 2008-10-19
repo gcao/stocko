@@ -97,5 +97,12 @@ describe StockPrice do
   it "should include ModelWithChange module" do
     StockPrice.included_modules.should include(ModelWithChange)
   end
+  
+  it "to_s should return formatted string" do
+    stock_price = StockPrice.create!(:stock => @stock,
+      :date => '1/1/2008', :volume => 1000, :open => 100, :close => 200,
+      :high => 300, :low => 50, :change => 1, :max_change => 2.5)
+    stock_price.to_s.should eql("2008-01-01       1,000  100.00  200.00  300.00   50.00    100.00%    250.00%")
+  end
 end
 
