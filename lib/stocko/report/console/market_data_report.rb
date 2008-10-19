@@ -1,7 +1,7 @@
 module Stocko
   module Report
     module Console
-      class StockPriceReport < Stocko::Report::Base
+      class MarketDataReport < Stocko::Report::Base
         include CommonDailyReport
       end
     end

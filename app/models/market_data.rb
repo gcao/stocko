@@ -24,12 +24,4 @@ class MarketData < ActiveRecord::Base
         :order => "date desc", :limit => n)
     end
   end
-  
-  def to_s
-    sprintf("#{date}  %11s  %8.2f  %8.2f  %8.2f  %8.2f  %8.2f%%  %8.2f%%\n", volume.to_s.commify, open, close, high, low, change*100, max_change*100)
-  end
-  
-  def self.report_header
-    "1 Date         2 Volume    3 Open   4 Close    5 High     6 Low   7 Change  8 MAX Chg\n"
-  end
 end

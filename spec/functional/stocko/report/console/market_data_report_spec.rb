@@ -3,22 +3,21 @@ require File.expand_path(File.dirname(__FILE__) + '/../../../functional_spec_hel
 module Stocko
   module Report
     module Console
-      describe StockPriceReport do
+      describe MarketDataReport do
         before :each do
           market = Market.create!(:name => :a_market)
-          stock = Stock.create!(:market => market, :name => :stock)
-          @stock_price = StockPrice.new(:stock => stock,
-            :date => '1/1/2008', :volume => 1000, :open => 100, :close => 200,
-            :high => 300, :low => 50, :change => 1, :max_change => 2.5)
+          @market_data = MarketData.create!(:market => market,
+            :date => '1/1/2008', :volume => 100000000, :open => 10000, :close => 12000.5,
+            :high => 13000.05, :low => 9500, :change => -0.0134, :max_change => 0.025)
         end
         
         it "should include CommonDailyReport module" do
-          StockPriceReport.included_modules.should include(CommonDailyReport)
+          MarketDataReport.included_modules.should include(CommonDailyReport)
         end
 
         describe "default report" do
           before :each do
-            @report = StockPriceReport.new @stock_price
+            @report = MarketDataReport.new @market_data
           end
 
           it "should return report header" do
@@ -28,7 +27,7 @@ module Stocko
 
           it "should return report body" do
             @report.body.should eql(
-              "2008-01-01        1,000    100.00    200.00    300.00     50.00    100.00%    250.00%\n")
+              "2008-01-01  100,000,000  10000.00  12000.50  13000.05   9500.00     -1.34%      2.50%\n")
           end
 
           it "should return report footer" do
@@ -39,19 +38,19 @@ module Stocko
         describe "colorful report" do
           before :each do
             config = Stocko::Report::Config.new :colorize => true
-            @report = StockPriceReport.new @stock_price, config
+            @report = MarketDataReport.new @market_data, config
           end
 
           it "produce red report if change >= 1%" do
-            @stock_price.change = 0.02
+            @market_data.change = 0.02
             @report.body.should eql(
-              "\033[31m2008-01-01        1,000    100.00    200.00    300.00     50.00      2.00%    250.00%\033[0m\n")
+              "\033[31m2008-01-01  100,000,000  10000.00  12000.50  13000.05   9500.00      2.00%      2.50%\033[0m\n")
           end
   
           it "produce green report if change <= -1%" do
-            @stock_price.change = -0.02
+            @market_data.change = -0.02
             @report.body.should eql(
-              "\033[32m2008-01-01        1,000    100.00    200.00    300.00     50.00     -2.00%    250.00%\033[0m\n")
+              "\033[32m2008-01-01  100,000,000  10000.00  12000.50  13000.05   9500.00     -2.00%      2.50%\033[0m\n")
           end
     
           it "should return report header" do

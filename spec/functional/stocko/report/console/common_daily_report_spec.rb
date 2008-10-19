@@ -3,22 +3,21 @@ require File.expand_path(File.dirname(__FILE__) + '/../../../functional_spec_hel
 module Stocko
   module Report
     module Console
-      describe StockPriceReport do
+      describe CommonDailyReport do
         before :each do
           market = Market.create!(:name => :a_market)
           stock = Stock.create!(:market => market, :name => :stock)
           @stock_price = StockPrice.new(:stock => stock,
             :date => '1/1/2008', :volume => 1000, :open => 100, :close => 200,
             :high => 300, :low => 50, :change => 1, :max_change => 2.5)
-        end
-        
-        it "should include CommonDailyReport module" do
-          StockPriceReport.included_modules.should include(CommonDailyReport)
+          class DummyReport < Stocko::Report::Base
+            include CommonDailyReport
+          end
         end
 
         describe "default report" do
           before :each do
-            @report = StockPriceReport.new @stock_price
+            @report = DummyReport.new @stock_price
           end
 
           it "should return report header" do
@@ -39,7 +38,7 @@ module Stocko
         describe "colorful report" do
           before :each do
             config = Stocko::Report::Config.new :colorize => true
-            @report = StockPriceReport.new @stock_price, config
+            @report = DummyReport.new @stock_price, config
           end
 
           it "produce red report if change >= 1%" do
