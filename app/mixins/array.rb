@@ -123,6 +123,14 @@ module ArrayExtensions
   def grouped?
     @grouped
   end
+  
+  def report from=0, page_size=10
+    if array_of_stock_prices?
+      StockPrice.report_header + slice(from, page_size).join
+    else
+      to_s
+    end
+  end
 
   private
 

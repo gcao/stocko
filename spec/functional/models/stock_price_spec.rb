@@ -104,5 +104,10 @@ describe StockPrice do
       :high => 300, :low => 50, :change => 1, :max_change => 2.5)
     stock_price.to_s.should eql("2008-01-01       1,000  100.00  200.00  300.00   50.00    100.00%    250.00%")
   end
+  
+  it "report_header" do
+    StockPrice.report_header.should eql(
+      "1 Date        2 Volume  3 Open 4 Close  5 High   6 Low   7 Change  8 MAX Chg\n")
+  end
 end
 

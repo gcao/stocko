@@ -5,6 +5,10 @@ module StringExtensions
     s = s.insert(-8, ',') if s.size > 7
     s
   end
+  
+  def line_count
+    split("\n").size
+  end
 end
 
 String.send :include, StringExtensions

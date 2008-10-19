@@ -198,5 +198,27 @@ describe RAILS_ROOT + '/app/mixins/array.rb' do
         groups[1][0].date.should eql(Date.parse('1/5/2008'))
       end
     end
+    
+    describe "sort" do
+      it "should sort" do
+        pending "not implemented"
+      end
+    end
+    
+    describe "report" do
+      it "should return report for array of stock prices" do
+        price = StockPrice.new(:date => '1/1/2008', :volume => 1000, :open => 100, :close => 210, :high => 330, :low => 50, :change => -0.6, :max_change => 1.4)
+        @array << price
+        @array.report.should eql(StockPrice.report_header + price.to_s)
+      end
+      
+      it "should output 10 rows by default" do
+        11.times do
+          @array << StockPrice.new(:date => '1/1/2008', :volume => 1000, :open => 100, :close => 210, :high => 330, :low => 50, :change => -0.6, :max_change => 1.4)
+        end
+        report = @array.report
+        report.line_count.should eql([].report.line_count + 10)
+      end
+    end
   end
 end
