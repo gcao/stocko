@@ -7,7 +7,7 @@ module Stocko
         market = Market.create!(:name => 'dowjones')
         
         MarketDataLoader.load_from_file(
-          RAILS_ROOT + '/spec/fixtures/csv/market_data.csv', market, :skip_lines => 1)
+          RAILS_ROOT + '/spec/fixtures/functional/market_data.csv', market, :skip_lines => 1)
 
         market = Market.find_by_name 'dowjones'
         market.data.size.should eql(2)
@@ -37,7 +37,7 @@ module Stocko
         market = Market.create!(:name => 'dowjones')
         
         MarketDataLoader.load_from_file(
-          RAILS_ROOT + '/spec/fixtures/csv/market_data_dup_lines.csv', market, :skip_lines => 1)
+          RAILS_ROOT + '/spec/fixtures/functional/market_data_dup_lines.csv', market, :skip_lines => 1)
         
         market = Market.find_by_name 'dowjones'
         market.data.size.should eql(1)
@@ -47,7 +47,7 @@ module Stocko
         market = Market.create!(:name => 'dowjones')
         
         MarketDataLoader.load_from_file(
-          RAILS_ROOT + '/spec/fixtures/csv/market_data.csv', market, :skip_lines => 1)
+          RAILS_ROOT + '/spec/fixtures/functional/market_data.csv', market, :skip_lines => 1)
           
         dates = MarketDate.all
         dates.size.should eql(2)

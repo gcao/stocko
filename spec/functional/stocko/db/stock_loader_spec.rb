@@ -7,7 +7,7 @@ module Stocko
         market = Market.create!(:name => 'dowjones')
         
         StockLoader.load_from_file(
-          RAILS_ROOT + '/spec/fixtures/csv/dowjones/ibm.csv', market, :skip_lines => 1)
+          RAILS_ROOT + '/spec/fixtures/functional/dowjones/ibm.csv', market, :skip_lines => 1)
         @stock = Stock.find_by_name 'ibm'
       end
       

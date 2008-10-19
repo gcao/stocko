@@ -5,7 +5,7 @@ module Stocko
     describe MarketLoader do
       it "should load market data and stocks with prices" do
         MarketLoader.load_from_directory(
-          RAILS_ROOT + '/spec/fixtures/csv/dowjones', :skip_lines => 1)
+          RAILS_ROOT + '/spec/fixtures/functional/dowjones', :skip_lines => 1)
         
         market = Market.find_by_name 'dowjones'
         

@@ -24,12 +24,12 @@ ActiveRecord::Schema.define(:version => 20081017031241) do
     t.decimal "prev_close", :precision => 10, :scale => 4
   end
 
+  add_index "market_data", ["max_change"], :name => "market_data_max_change"
   add_index "market_data", ["change"], :name => "market_data_change"
   add_index "market_data", ["close"], :name => "market_data_close"
-  add_index "market_data", ["date", "market_id"], :name => "market_data_market_id_date", :unique => true
-  add_index "market_data", ["max_change"], :name => "market_data_max_change"
   add_index "market_data", ["open"], :name => "market_data_open"
   add_index "market_data", ["volume"], :name => "market_data_volume"
+  add_index "market_data", ["market_id", "date"], :name => "market_data_market_id_date", :unique => true
 
   create_table "market_dates", :force => true do |t|
     t.date    "date",           :null => false
@@ -41,9 +41,9 @@ ActiveRecord::Schema.define(:version => 20081017031241) do
     t.boolean "last_of_month"
   end
 
-  add_index "market_dates", ["date"], :name => "market_dates_date", :unique => true
   add_index "market_dates", ["month"], :name => "market_dates_month"
   add_index "market_dates", ["year"], :name => "market_dates_year"
+  add_index "market_dates", ["date"], :name => "market_dates_date", :unique => true
 
   create_table "markets", :force => true do |t|
     t.string "name"
@@ -65,12 +65,12 @@ ActiveRecord::Schema.define(:version => 20081017031241) do
     t.decimal "prev_close", :precision => 8, :scale => 4
   end
 
-  add_index "stock_prices", ["change"], :name => "stock_prices_change"
-  add_index "stock_prices", ["high"], :name => "stock_prices_high"
-  add_index "stock_prices", ["low"], :name => "stock_prices_low"
   add_index "stock_prices", ["max_change"], :name => "stock_prices_max_change"
-  add_index "stock_prices", ["date", "stock_id"], :name => "stock_prices_stock_id_date", :unique => true
+  add_index "stock_prices", ["change"], :name => "stock_prices_change"
+  add_index "stock_prices", ["low"], :name => "stock_prices_low"
+  add_index "stock_prices", ["high"], :name => "stock_prices_high"
   add_index "stock_prices", ["volume"], :name => "stock_prices_volume"
+  add_index "stock_prices", ["stock_id", "date"], :name => "stock_prices_stock_id_date", :unique => true
 
   create_table "stocks", :force => true do |t|
     t.integer "market_id",                   :null => false
