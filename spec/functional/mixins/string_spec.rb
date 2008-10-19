@@ -4,6 +4,7 @@ describe RAILS_ROOT + '/app/mixins/string.rb' do
   it "commify add comma to string" do
     "1000".commify.should eql('1,000')
     "1000000".commify.should eql('1,000,000')
+    "1000000000".commify.should eql('1,000,000,000')
   end
   
   it "should return line count" do

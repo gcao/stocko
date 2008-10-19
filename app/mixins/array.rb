@@ -127,6 +127,16 @@ module ArrayExtensions
   def report from=0, page_size=10
     if array_of_stock_prices?
       StockPrice.report_header + slice(from, page_size).join
+    elsif array_of_market_data?
+      MarketData.report_header + slice(from, page_size).join
+    else
+      to_s
+    end
+  end
+  
+  def colorful_report from=0, page_size=10
+    if array_of_stock_prices?
+      StockPrice.colorful_report_header + slice(from, page_size).map{|elem| elem.colorful_report}.join
     else
       to_s
     end

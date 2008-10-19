@@ -81,4 +81,16 @@ describe MarketData do
   it "should include ModelWithChange module" do
     MarketData.included_modules.should include(ModelWithChange)
   end
+  
+  it "to_s should return formatted string" do
+    market_data = MarketData.create!(:market => @market,
+      :date => '1/1/2008', :volume => 100000000, :open => 10000, :close => 12000.5,
+      :high => 13000.05, :low => 9500, :change => -0.0134, :max_change => 0.025)
+    market_data.to_s.should eql("2008-01-01  100,000,000  10000.00  12000.50  13000.05   9500.00     -1.34%      2.50%\n")
+  end
+  
+  it "report_header" do
+    MarketData.report_header.should eql(
+      "1 Date         2 Volume    3 Open   4 Close    5 High     6 Low   7 Change  8 MAX Chg\n")
+  end
 end

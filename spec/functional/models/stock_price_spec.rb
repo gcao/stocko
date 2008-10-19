@@ -102,12 +102,39 @@ describe StockPrice do
     stock_price = StockPrice.create!(:stock => @stock,
       :date => '1/1/2008', :volume => 1000, :open => 100, :close => 200,
       :high => 300, :low => 50, :change => 1, :max_change => 2.5)
-    stock_price.to_s.should eql("2008-01-01       1,000  100.00  200.00  300.00   50.00    100.00%    250.00%")
+    stock_price.to_s.should eql("2008-01-01       1,000  100.00  200.00  300.00   50.00    100.00%    250.00%\n")
   end
   
-  it "report_header" do
-    StockPrice.report_header.should eql(
+  describe "report" do
+    it "report_header" do
+      StockPrice.report_header.should eql(
       "1 Date        2 Volume  3 Open 4 Close  5 High   6 Low   7 Change  8 MAX Chg\n")
+    end
+  end
+
+  describe "colorful report" do
+    before :each do
+      @stock_price = StockPrice.new(:stock => @stock,
+      :date => '1/1/2008', :volume => 1000, :open => 100, :close => 200,
+      :high => 300, :low => 50, :change => 1, :max_change => 2.5)
+    end
+
+    it "produce red report if change >= 1%" do
+      @stock_price.change = 0.02
+      @stock_price.colorful_report.should eql(
+        "\033[31m2008-01-01       1,000  100.00  200.00  300.00   50.00      2.00%    250.00%\033[0m\n")
+    end
+    
+    it "produce green report if change <= -1%" do
+      @stock_price.change = -0.02
+      @stock_price.colorful_report.should eql(
+        "\033[32m2008-01-01       1,000  100.00  200.00  300.00   50.00     -2.00%    250.00%\033[0m\n")
+    end
+    
+    it "report_header" do
+      StockPrice.colorful_report_header.should eql(
+        "\033[34m1 Date        2 Volume  3 Open 4 Close  5 High   6 Low   7 Change  8 MAX Chg\033[0m\n")
+    end
   end
 end
 
