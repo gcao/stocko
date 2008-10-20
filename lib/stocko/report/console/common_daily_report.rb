@@ -2,11 +2,14 @@ module Stocko
   module Report
     module Console
       module CommonDailyReport
+        HEADER = "1 Date         2 Volume    3 Open   4 Close    5 High     6 Low   7 Change  8 MAX Chg\n"
+        COLORFUL_HEADER = "\033[34m1 Date         2 Volume    3 Open   4 Close    5 High     6 Low   7 Change  8 MAX Chg\033[0m\n"
+        
         def header
           if colorize?
-            "\033[34m1 Date         2 Volume    3 Open   4 Close    5 High     6 Low   7 Change  8 MAX Chg\033[0m\n"
+            COLORFUL_HEADER
           else
-            "1 Date         2 Volume    3 Open   4 Close    5 High     6 Low   7 Change  8 MAX Chg\n"
+            HEADER
           end
         end
 
