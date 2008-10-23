@@ -3,20 +3,26 @@ module Stocko
     module Console
       class ArrayReport < Stocko::Report::Base
         def header
-          StockPriceReport::HEADER
+          if @config[:colorize]
+            StockPriceReport::COLORFUL_HEADER
+          else
+            StockPriceReport::HEADER
+          end
         end
         
         def body
           unless @model.empty?
             @model[start_row - 1, rows].
-              map{ |elem| StockPriceReport.new(elem).body }.join
+              map{ |elem| StockPriceReport.new(elem, @config).body }.join
           end
         end
         
         def footer
-          footer = "Page #{page_number}/#{pages}      "
-          footer += "#{start_row} - #{end_row} of " unless @model.empty?
-          footer += "#{@model.size} rows"
+          if @config[:colorize]
+            "\033[36m" + default_footer.sub("\n", "\033[0m\n")
+          else
+            default_footer
+          end
         end
         
         def page_number
@@ -62,6 +68,12 @@ module Stocko
         
         def rows
           end_row - start_row + 1
+        end
+        
+        def default_footer
+          footer = "Page #{page_number}/#{pages}      "
+          footer += "#{start_row} - #{end_row} of " unless @model.empty?
+          footer += "#{@model.size} rows\n"
         end
       end
     end

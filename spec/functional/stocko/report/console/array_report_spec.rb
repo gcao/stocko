@@ -30,7 +30,7 @@ module Stocko
           end
 
           it "report footer should output array size, page number, total pages etc" do
-            @report.footer.should eql("Page 1/1      1 - 6 of 6 rows")
+            @report.footer.should eql("Page 1/1      1 - 6 of 6 rows\n")
           end
           
           it "return total pages" do
@@ -97,20 +97,20 @@ module Stocko
 
         describe "colorful report" do
           before :each do
-            config = Stocko::Report::Config.new :colorize => true
-            @report = ArrayReport.new @array, config
+            @config = Stocko::Report::Config.new :colorize => true
+            @report = ArrayReport.new @array, @config
           end
 
           it "report header should be the same as stock price report header" do
-            pending "not implemented"
+            @report.header.should eql(StockPriceReport.new(@array[0], @config).header)
           end
 
           it "report body should contains stock price bodies" do
-            pending "not implemented"
+            @report.body.should eql(@array.map{|elem| StockPriceReport.new(elem, @config).body}.join)
           end
 
           it "report footer should output array size, page number, total pages etc" do
-            pending "not implemented"
+            @report.footer.should eql("\033[36mPage 1/1      1 - 6 of 6 rows\033[0m\n")
           end
         end
       end
