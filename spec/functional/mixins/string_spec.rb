@@ -11,4 +11,17 @@ describe RAILS_ROOT + '/app/mixins/string.rb' do
     "a\nb".line_count.should eql(2)
     "a\nb\n".line_count.should eql(2)
   end
+  
+  it "should return class" do
+    "Object".to_class.should eql(Object)
+  end
+  
+  it "should return class in module" do
+    module M
+      class C
+      end
+    end
+    
+    "M::C".to_class.should eql(M::C)
+  end
 end

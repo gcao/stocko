@@ -14,8 +14,8 @@ module Report
         if @report_class
           @report_class.to_s
         else 
-          default_report_class = self.class.to_s + "Report"
-          if Object.const_defined? default_report_class
+          default_report_class = self.to_s + "Report"
+          if default_report_class.to_class
             default_report_class
           else
             nil

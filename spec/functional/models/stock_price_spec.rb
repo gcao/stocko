@@ -97,5 +97,9 @@ describe StockPrice do
   it "should include ModelWithChange module" do
     StockPrice.included_modules.should include(ModelWithChange)
   end
+  
+  it "report_class should return StockPriceReport" do
+    StockPrice.report_class.should eql("StockPriceReport")
+  end
 end
 

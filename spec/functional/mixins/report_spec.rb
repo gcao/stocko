@@ -57,6 +57,10 @@ describe "customized report class" do
     class TestClass2
     end
   end
+  
+  it "report_class should discover report class" do
+    TestClass2.report_class.should eql("TestClass2Report")
+  end
 
   it "should render report using default report class" do
     TestClass2.new.report.should eql("header body footer")
