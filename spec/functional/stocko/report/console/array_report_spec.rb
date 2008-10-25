@@ -3,7 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../../../functional_spec_hel
 module Stocko
   module Report
     module Console
-      describe "report for array of stock prices" do
+      describe "report for array" do
         before :each do
           market = Market.create!(:name => :a_market)
           stock = Stock.create!(:market => market, :name => :stock)

@@ -24,6 +24,10 @@ module Stocko
       it "Default page size is 20" do
         Stocko::Report::Config.new[:page_size].should eql(20)
       end
+      
+      it "returns default instance" do
+        Stocko::Report::Config.default[:page_size].should eql(Stocko::Report::Config::DEFAULT_OPTIONS[:page_size])
+      end
     end
   end
 end

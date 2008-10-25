@@ -44,6 +44,29 @@ module Stocko
         end
         TestReport.new('test').to_s.should eql('headerbodyfooter')
       end
+      
+      describe "default implementation" do
+        it "nil" do
+          report = Base.new nil
+          report.header.should eql("<NilClass>\n")
+          report.body.should eql("nil\n")
+          report.footer.should be_nil
+        end
+        
+        it "String" do
+          report = Base.new 'test'
+          report.header.should eql("<String>\n")
+          report.body.should eql("test\n")
+          report.footer.should be_nil
+        end
+        
+        it "BigDecimal" do
+          report = Base.new BigDecimal.new('10.56')
+          report.header.should eql("<BigDecimal>\n")
+          report.body.should eql("10.56\n")
+          report.footer.should be_nil
+        end
+      end
     end
   end
 end

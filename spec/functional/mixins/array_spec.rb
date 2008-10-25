@@ -208,42 +208,5 @@ describe RAILS_ROOT + '/app/mixins/array.rb' do
         pending "not implemented"
       end
     end
-    
-    # describe "report" do
-    #   describe "array of stock prices" do
-    #     it "should return report" do
-    #       @array << StockPrice.new(:date => '1/1/2008', :volume => 1000, :open => 100, :close => 210, :high => 330, :low => 50, :change => -0.6, :max_change => 1.4)
-    #       @array.report.should eql(StockPrice.report_header + @array[0].to_s)
-    #     end
-    #     
-    #     it "should produce colorful report" do
-    #       @array << StockPrice.new(:date => '1/1/2008', :volume => 1000, :open => 100, :close => 210, :high => 330, :low => 50, :change => -0.6, :max_change => 1.4)
-    #       @array.colorful_report.should eql(StockPrice.colorful_report_header + @array[0].colorful_report)
-    #     end
-    # 
-    #     it "should output 10 rows by default" do
-    #       11.times do
-    #         @array << StockPrice.new(:date => '1/1/2008', :volume => 1000, :open => 100, :close => 210, :high => 330, :low => 50, :change => -0.6, :max_change => 1.4)
-    #       end
-    #       report = @array.report
-    #       report.line_count.should eql([].report.line_count + 10)
-    #     end
-    #   end
-    #   
-    #   describe "array of market data" do
-    #     it "should return report" do
-    #       @array << MarketData.new(:date => '1/1/2008', :volume => 1000, :open => 100, :close => 210, :high => 330, :low => 50, :change => -0.6, :max_change => 1.4)
-    #       @array.report.should eql(MarketData.report_header + @array[0].to_s)
-    #     end
-    # 
-    #     it "should output 10 rows by default" do
-    #       11.times do
-    #         @array << MarketData.new(:date => '1/1/2008', :volume => 1000, :open => 100, :close => 210, :high => 330, :low => 50, :change => -0.6, :max_change => 1.4)
-    #       end
-    #       report = @array.report
-    #       report.line_count.should eql([].report.line_count + 10)
-    #     end
-    #   end
-    # end
   end
 end

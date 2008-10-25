@@ -15,6 +15,10 @@ module Stocko
       def [] key
         @options[key.to_sym]
       end
+      
+      def self.default
+        @default ||= Stocko::Report::Config.new
+      end
     end
   end
 end
