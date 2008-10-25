@@ -32,13 +32,15 @@ class ArrayReport < Stocko::Report::Base
 
   def next_page
     @page_number += 1 if page_number < pages
-    @page_number
+    self
   end
+  alias next next_page
 
   def prev_page
     @page_number -= 1 if page_number > 1
-    @page_number
+    self
   end
+  alias prev prev_page
 
   def goto_page page
     if page > pages
@@ -46,8 +48,9 @@ class ArrayReport < Stocko::Report::Base
     elsif page > 0
       @page_number = page
     end
-    @page_number
+    self
   end
+  alias goto goto_page
 
   private 
 

@@ -53,6 +53,10 @@ describe "report for array" do
       @report.pages.should eql(2)
     end
     
+    it "next_page returns self" do
+      @report.next_page.should eql(@report)
+    end
+    
     it "next_page changes page number" do
       @report.next_page
       @report.page_number.should eql(2)
@@ -63,6 +67,10 @@ describe "report for array" do
       @report.page_number.should eql(2)
       @report.next_page
       @report.page_number.should eql(2)
+    end
+    
+    it "prev_page returns self" do
+      @report.prev_page.should eql(@report)
     end
     
     it "prev_page changes page number" do
@@ -81,8 +89,12 @@ describe "report for array" do
       @report.page_number.should eql(1)
     end
     
+    it "goto_page returns self" do
+      @report.goto_page(2).should eql(@report)
+    end
+    
     it "goto_page go to specified page" do
-      @report.goto_page 2
+      @report.goto_page(2)
       @report.page_number.should eql(2)
     end
     
