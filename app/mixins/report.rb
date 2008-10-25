@@ -5,7 +5,7 @@ module Report
             else Stocko::Report::Base
             end
 
-    klass.new(self, config).to_s
+    klass.new(self, config)
   end
   
   module ClassMethods

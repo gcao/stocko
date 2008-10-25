@@ -18,11 +18,11 @@ describe RAILS_ROOT + '/app/mixins/report.rb' do
   end
 
   it "returns report" do
-    TestClass.new.report.should eql("<TestClass>\ntest\n")
+    TestClass.new.report.to_s.should eql("<TestClass>\ntest\n")
   end
 
   it "takes an optional report config" do
-    TestClass.new.report(Stocko::Report::Config.new).should eql("<TestClass>\ntest\n")
+    TestClass.new.report(Stocko::Report::Config.new).to_s.should eql("<TestClass>\ntest\n")
   end
 end
 
@@ -63,11 +63,11 @@ describe "customized report class" do
   end
 
   it "should render report using default report class" do
-    TestClass2.new.report.should eql("header body footer")
+    TestClass2.new.report.to_s.should eql("header body footer")
   end
 
   it "should pass config to report class" do
     config = Stocko::Report::Config.new(:colorize => true)
-    TestClass2.new.report(config).should eql("colorful header colorful body colorful footer")
+    TestClass2.new.report(config).to_s.should eql("colorful header colorful body colorful footer")
   end
 end
