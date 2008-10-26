@@ -10,6 +10,10 @@ module Stocko
         stock = Stock.create!(:market => market, :name => 'xxx')
       end
 
+      it "should returns default market" do
+        @service.market.should eql(Market.first)
+      end
+
       it "should set active stock" do
         @service.stock "xxx"
 

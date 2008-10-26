@@ -7,6 +7,10 @@ module Stocko
       include DateFilter
       
       attr :last_value
+      
+      def market
+        @market ||= Market.first
+      end
 
       def stock stock=Stocko::Service::NOT_SET
         return @stock if stock == Stocko::Service::NOT_SET

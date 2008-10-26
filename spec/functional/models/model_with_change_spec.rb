@@ -2,15 +2,10 @@ require File.expand_path(File.dirname(__FILE__) + '/../functional_spec_helper')
 
 describe ModelWithChange do
   it "verify named scope option" do
-    pending "#scope_options does not work"
-    
     low = 0
     high = 0.5
-    actual = StockPrice.change_between(low, high)
-    expected = {:conditions => 
-      {:between => ['change >= ? and change <= ?', low, high]}
-    }
-    actual.scope_options.should eql(expected)
+    expected = {:conditions => ['change >= ? and change <= ?', low, high]}
+    StockPrice.change_between(low, high).proxy_options.should == expected # eql() does not work here !!!
   end
   
   it "should define named scope 'between'" do
@@ -18,12 +13,12 @@ describe ModelWithChange do
     StockPrice.change_between(0, 0.5)
   end
   
-  it "should define named scope 'change_ge'" do
+  it "should define named scope 'change_gt'" do
     StockPrice.included_modules.should include(ModelWithDate)
     StockPrice.change_gt(0.01)
   end
   
-  it "should define named scope 'change_le'" do
+  it "should define named scope 'change_lt'" do
     StockPrice.included_modules.should include(ModelWithDate)
     StockPrice.change_lt(0.01)
   end
