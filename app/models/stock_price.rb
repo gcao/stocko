@@ -5,6 +5,10 @@ class StockPrice < ActiveRecord::Base
   
   belongs_to :stock
   
+  named_scope :stock, lambda{ |stock|
+    {:conditions => ['stock_id = ?', stock.id]} 
+  }
+  
   def next n=1
     if n == 1
       StockPrice.find(:first, :conditions => ["stock_id = ? and date > ?", stock.id, date])

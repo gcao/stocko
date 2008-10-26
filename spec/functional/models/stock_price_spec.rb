@@ -101,5 +101,9 @@ describe StockPrice do
   it "report_class should return StockPriceReport" do
     StockPrice.report_class.should eql("StockPriceReport")
   end
+  
+  it "should define named scope 'stock'" do
+    StockPrice.stock(@stock)
+  end
 end
 

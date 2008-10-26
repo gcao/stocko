@@ -17,4 +17,14 @@ describe ModelWithChange do
     StockPrice.included_modules.should include(ModelWithChange)
     StockPrice.change_between(0, 0.5)
   end
+  
+  it "should define named scope 'change_ge'" do
+    StockPrice.included_modules.should include(ModelWithDate)
+    StockPrice.change_gt(0.01)
+  end
+  
+  it "should define named scope 'change_le'" do
+    StockPrice.included_modules.should include(ModelWithDate)
+    StockPrice.change_lt(0.01)
+  end
 end
