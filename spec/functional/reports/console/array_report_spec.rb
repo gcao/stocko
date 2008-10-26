@@ -123,3 +123,17 @@ describe "report for array" do
     end
   end
 end
+
+describe "array of objects that uses default report" do
+  before :each do
+    @array = ["a", "b", "c"]
+  end
+  
+  it "returns header" do
+    @array.report.header.should eql(@array[0].report.header)
+  end
+  
+  it "returns body" do
+    @array.report.body.should eql("a\nb\nc\n")
+  end
+end

@@ -19,6 +19,10 @@ module ArrayExtensions
     empty? or first.is_a? StockPrice
   end
 
+  def array_of_market_data_or_stock_prices?
+    empty? or first.is_a? MarketData or first.is_a? StockPrice
+  end
+
   def volume
     if array_of_market_data_or_stock_prices?
       sum = inject( nil ) { |sum,x| sum ? sum + x.volume : x.volume }
@@ -122,30 +126,6 @@ module ArrayExtensions
   
   def grouped?
     @grouped
-  end
-    # 
-    # def report from=0, page_size=10
-    #   if array_of_stock_prices?
-    #     StockPrice.report_header + slice(from, page_size).join
-    #   elsif array_of_market_data?
-    #     MarketData.report_header + slice(from, page_size).join
-    #   else
-    #     to_s
-    #   end
-    # end
-    # 
-    # def colorful_report from=0, page_size=10
-    #   if array_of_stock_prices?
-    #     StockPrice.colorful_report_header + slice(from, page_size).map{|elem| elem.colorful_report}.join
-    #   else
-    #     to_s
-    #   end
-    # end
-
-  private
-
-  def array_of_market_data_or_stock_prices?
-    empty? or first.is_a? MarketData or first.is_a? StockPrice
   end
 
 end

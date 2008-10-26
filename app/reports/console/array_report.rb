@@ -1,16 +1,16 @@
 class ArrayReport < Stocko::Report::Base
   def header
-    if @config[:colorize]
-      StockPriceReport::COLORFUL_HEADER
+    if @model.empty?
+      "<Empty Array>"
     else
-      StockPriceReport::HEADER
+      @model[0].report(@config).header
     end
   end
 
   def body
     unless @model.empty?
       @model[start_row - 1, rows].
-      map{ |elem| StockPriceReport.new(elem, @config).body }.join
+      map{ |elem| elem.report(@config).body }.join
     end
   end
 
