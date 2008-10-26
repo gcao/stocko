@@ -24,11 +24,11 @@ module Stocko
         if @change_gt.nil? and @change_lt.nil?
           source
         elsif @change_gt.nil?
-          source.change_gt(@change_gt)
-        elsif @change_lt.nil?
           source.change_lt(@change_lt)
+        elsif @change_lt.nil?
+          source.change_gt(@change_gt)
         else
-          source.change(@change_gt, @change_lt)
+          source.change_between(@change_gt, @change_lt)
         end
       end
     end
