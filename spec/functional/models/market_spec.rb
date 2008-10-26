@@ -36,4 +36,10 @@ describe Market do
   it "to_s returns market name" do
     Market.new(:name => 'abc').to_s.should eql('abc')
   end
+  
+  it "class methods returns named market objects" do
+    market = Market.create!(:name => 'xxx', :description => 'a_description')
+    Market.xxx.name.should eql('xxx')
+    Market.xxx.description.should eql('a_description')
+  end
 end
