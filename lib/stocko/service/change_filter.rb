@@ -19,6 +19,18 @@ module Stocko
         @change_gt = BigDecimal.new(change_gt.to_s)
         @change_lt = BigDecimal.new(change_lt.to_s)
       end
+      
+      def filter_by_change source
+        if @change_gt.nil? and @change_lt.nil?
+          source
+        elsif @change_gt.nil?
+          source.change_gt(@change_gt)
+        elsif @change_lt.nil?
+          source.change_lt(@change_lt)
+        else
+          source.change(@change_gt, @change_lt)
+        end
+      end
     end
   end
 end

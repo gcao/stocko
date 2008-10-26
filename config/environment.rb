@@ -69,4 +69,5 @@ Rails::Initializer.run do |config|
   config.gem "facets"
   config.gem "rspec-rails", :lib => "spec" 
   config.gem "ar-extensions"
+  config.gem "rr"
 end

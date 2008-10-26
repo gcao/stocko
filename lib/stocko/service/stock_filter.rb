@@ -2,14 +2,7 @@ require 'stocko/service/common'
 
 module Stocko
   module Service
-    class StockoService
-      include ChangeFilter
-      include DateFilter
-      
-      def market
-        @market ||= Market.first
-      end
-
+    module StockFilter
       def stock stock=Stocko::Service::NOT_SET
         return @stock if stock == Stocko::Service::NOT_SET
         
@@ -18,19 +11,14 @@ module Stocko
                  else Stock.find_by_name stock
                  end
       end
-
-      def prices
-        source = StockPrice        
-        
-        source = source.stock(@stock) unless @stock.nil?
-
-        
-        
-        
-        
-        source
-      end
       
+      def filter_by_stock source
+        if @stock.nil?
+          source
+        else
+          source.stock(@stock)
+        end
+      end
     end
   end
 end

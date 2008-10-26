@@ -17,6 +17,18 @@ module Stocko
         return @to_date if to_date == NOT_SET
         @to_date = Date.parse(to_date)
       end
+      
+      def filter_by_date source
+        if @from_date.nil? and @to_date.nil?
+          source
+        elsif @from_date.nil?
+          source.before(@to_date)
+        elsif @to_date.nil?
+          source.after(@from_date)
+        else
+          source.between(@from_date, @to_date)
+        end
+      end
     end
   end
 end
