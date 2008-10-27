@@ -52,6 +52,26 @@ module Stocko
           @service.prices
         end
       end
+      
+      describe "market data" do
+        it "return default market by default" do
+          @service.marketdata.should == MarketData.market(@service.market)
+        end
+        
+        it "filter by date" do
+          @service.from_date '11/1/2008'
+          
+          mock(o = @service.marketdata).after(Date.parse('11/1/2008'))
+          @service.marketdata
+        end
+        
+        it "filter by change" do
+          @service.change_gt 0.01
+          
+          mock(o = StockPrice).change_gt(BigDecimal.new('0.01'))
+          @service.prices
+        end
+      end
     end
   end
 end

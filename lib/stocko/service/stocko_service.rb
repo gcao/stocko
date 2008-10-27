@@ -12,9 +12,13 @@ module Stocko
       end
 
       def prices
-        source = filter_by_stock StockPrice
-        source = filter_by_date source
+        source = filter_by_stock  StockPrice
+        source = filter_by_date   source
         source = filter_by_change source
+      end
+      
+      def marketdata
+        market.data
       end
     end
   end

@@ -7,6 +7,10 @@ class MarketData < ActiveRecord::Base
   
   belongs_to :market
   
+  named_scope :market, lambda{ |market|
+    {:conditions => ['market_id = ?', market.id]} 
+  }
+  
   def next n=1
     if n == 1
       MarketData.find(:first, :conditions => ["market_id = ? and date > ?", market.id, date])

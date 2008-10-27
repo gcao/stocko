@@ -42,4 +42,10 @@ describe Market do
     Market.xxx.name.should eql('xxx')
     Market.xxx.description.should eql('a_description')
   end
+  
+  it "defines named scope 'market'" do
+    market = Market.create!(:name => 'xxx', :description => 'a_description')
+    expected = {:conditions => ['market_id = ?', market.id]}
+    MarketData.market(market).proxy_options.should == expected # eql() does not work here !!!
+  end
 end
