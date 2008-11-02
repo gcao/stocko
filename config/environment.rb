@@ -70,4 +70,8 @@ Rails::Initializer.run do |config|
   config.gem "rspec-rails", :lib => "spec" 
   config.gem "ar-extensions"
   config.gem "rr"
+  config.gem "thoughtbot-factory_girl", :lib => "factory_girl", :source => "http://gems.github.com"
 end
+
+require 'memcached'
+$cache = Memcached.new("localhost:11211")

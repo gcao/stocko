@@ -2,8 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../../functional_spec_helper
 
 describe "report for array" do
   before :each do
-    market = Market.create!(:name => :a_market)
-    stock = Stock.create!(:market => market, :name => :stock)
+    stock = Stock.create!(:name => :stock)
     @array = []
     @array << StockPrice.new(:stock => stock, :date => '1/1/2008', :volume => 1000, :open => 100, :close => 200, :high => 300, :low => 50, :change => 1, :max_change => 2.5)
     @array << StockPrice.new(:stock => stock, :date => '1/1/2008', :volume => 1000, :open => 100, :close => 200, :high => 300, :low => 50, :change => 1, :max_change => 2.5)
@@ -136,4 +135,14 @@ describe "array of objects that uses default report" do
   it "returns body" do
     @array.report.body.should eql("a\nb\nc\n")
   end
+end
+
+describe "empty array" do
+  before :each do
+    @array = []
+  end
+  
+  it { @array.report.header.should eql("<Empty Array>\n") }
+  it { @array.report.body.should be_nil }
+  it { @array.report.footer.should be_nil }
 end

@@ -1,7 +1,7 @@
 class ArrayReport < Stocko::Report::Base
   def header
     if @model.empty?
-      "<Empty Array>"
+      "<Empty Array>\n"
     else
       @model[0].report(@config).header
     end
@@ -15,6 +15,8 @@ class ArrayReport < Stocko::Report::Base
   end
 
   def footer
+    return nil if @model.empty?
+    
     if @config[:colorize]
       "\033[36m" + default_footer.sub("\n", "\033[0m\n")
     else
