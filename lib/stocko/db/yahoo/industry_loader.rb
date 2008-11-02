@@ -7,11 +7,7 @@ module Stocko
       class IndustryLoader
         def load_from_sector sector
           url = sector.attrs['yahoo_url']
-          response = $cache.get(url)
-          unless response
-            response = Net::HTTP.get(URI.parse(url))
-            $cache.set(url, response)
-          end
+          response = downloader.download url
           document = Nokogiri::HTML(response)
           td_xpath = "//table//table/tr[position()>3]/td[1]/a"
           document.xpath(td_xpath).each do |elem|
