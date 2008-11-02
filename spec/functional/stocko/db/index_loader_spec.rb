@@ -3,7 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../../functional_spec_helper
 module Stocko
   module Db
     describe MarketLoader do
-      it "should load market data and stocks with prices" do
+      it "should load indexes and stocks with prices" do
         MarketLoader.load_from_directory(
           RAILS_ROOT + '/spec/fixtures/functional/dowjones', :skip_lines => 1)
         

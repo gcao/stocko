@@ -4,11 +4,9 @@ module Stocko
   module Db
     describe StockLoader do
       before :each do
-        market = Market.create!(:name => 'dowjones')
-        
-        StockLoader.load_from_file(
-          RAILS_ROOT + '/spec/fixtures/functional/dowjones/ibm.csv', market, :skip_lines => 1)
         @stock = Stock.find_by_name 'ibm'
+        StockLoader.load_from_file(@stock,
+          RAILS_ROOT + '/spec/fixtures/functional/dowjones/ibm.csv', :skip_lines => 1)
       end
       
       it "should load stock with prices" do

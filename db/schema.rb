@@ -9,7 +9,27 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081029004235) do
+ActiveRecord::Schema.define(:version => 20081005195315) do
+
+  create_table "index_prices", :force => true do |t|
+    t.integer "stock_index_id",                                :null => false
+    t.date    "date",                                          :null => false
+    t.integer "volume"
+    t.decimal "open",           :precision => 10, :scale => 4
+    t.decimal "close",          :precision => 10, :scale => 4
+    t.decimal "high",           :precision => 10, :scale => 4
+    t.decimal "low",            :precision => 10, :scale => 4
+    t.decimal "change",         :precision => 8,  :scale => 4
+    t.decimal "max_change",     :precision => 8,  :scale => 4
+    t.decimal "prev_close",     :precision => 10, :scale => 4
+  end
+
+  add_index "index_prices", ["change"], :name => "index_prices_change"
+  add_index "index_prices", ["close"], :name => "index_prices_close"
+  add_index "index_prices", ["max_change"], :name => "index_prices_max_change"
+  add_index "index_prices", ["open"], :name => "index_prices_open"
+  add_index "index_prices", ["date", "stock_index_id"], :name => "index_prices_stock_index_id_date", :unique => true
+  add_index "index_prices", ["volume"], :name => "index_prices_volume"
 
   create_table "industries", :force => true do |t|
     t.integer "sector_id",                    :null => false
@@ -20,26 +40,6 @@ ActiveRecord::Schema.define(:version => 20081029004235) do
 
   add_index "industries", ["name"], :name => "industries_name", :unique => true
   add_index "industries", ["sector_id"], :name => "industries_sector_id"
-
-  create_table "market_data", :force => true do |t|
-    t.integer "market_id",                                 :null => false
-    t.date    "date",                                      :null => false
-    t.integer "volume"
-    t.decimal "open",       :precision => 10, :scale => 4
-    t.decimal "close",      :precision => 10, :scale => 4
-    t.decimal "high",       :precision => 10, :scale => 4
-    t.decimal "low",        :precision => 10, :scale => 4
-    t.decimal "change",     :precision => 8,  :scale => 4
-    t.decimal "max_change", :precision => 8,  :scale => 4
-    t.decimal "prev_close", :precision => 10, :scale => 4
-  end
-
-  add_index "market_data", ["change"], :name => "market_data_change"
-  add_index "market_data", ["close"], :name => "market_data_close"
-  add_index "market_data", ["date", "market_id"], :name => "market_data_market_id_date", :unique => true
-  add_index "market_data", ["max_change"], :name => "market_data_max_change"
-  add_index "market_data", ["open"], :name => "market_data_open"
-  add_index "market_data", ["volume"], :name => "market_data_volume"
 
   create_table "market_dates", :force => true do |t|
     t.date    "date",           :null => false
@@ -55,13 +55,6 @@ ActiveRecord::Schema.define(:version => 20081029004235) do
   add_index "market_dates", ["month"], :name => "market_dates_month"
   add_index "market_dates", ["year"], :name => "market_dates_year"
 
-  create_table "markets", :force => true do |t|
-    t.string "name"
-    t.string "description", :limit => 4000
-  end
-
-  add_index "markets", ["name"], :name => "markets_name", :unique => true
-
   create_table "sectors", :force => true do |t|
     t.string "name",                         :null => false
     t.string "description", :limit => 4000
@@ -69,6 +62,14 @@ ActiveRecord::Schema.define(:version => 20081029004235) do
   end
 
   add_index "sectors", ["name"], :name => "sectors_name", :unique => true
+
+  create_table "stock_indexes", :force => true do |t|
+    t.string "name",                         :null => false
+    t.string "description", :limit => 4000
+    t.string "attrs",       :limit => 65536
+  end
+
+  add_index "stock_indexes", ["name"], :name => "stock_indexes_name", :unique => true
 
   create_table "stock_prices", :force => true do |t|
     t.integer "stock_id",                                 :null => false
@@ -91,9 +92,8 @@ ActiveRecord::Schema.define(:version => 20081029004235) do
   add_index "stock_prices", ["volume"], :name => "stock_prices_volume"
 
   create_table "stocks", :force => true do |t|
-    t.integer "market_id",                   :null => false
-    t.string  "name"
-    t.string  "description", :limit => 4000
+    t.string "name"
+    t.string "description", :limit => 4000
   end
 
   add_index "stocks", ["name"], :name => "stocks_name", :unique => true
