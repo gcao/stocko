@@ -55,6 +55,13 @@ ActiveRecord::Schema.define(:version => 20081005195315) do
   add_index "market_dates", ["month"], :name => "market_dates_month"
   add_index "market_dates", ["year"], :name => "market_dates_year"
 
+  create_table "markets", :force => true do |t|
+    t.string "name"
+    t.string "description", :limit => 4000
+  end
+
+  add_index "markets", ["name"], :name => "markets_name", :unique => true
+
   create_table "sectors", :force => true do |t|
     t.string "name",                         :null => false
     t.string "description", :limit => 4000
