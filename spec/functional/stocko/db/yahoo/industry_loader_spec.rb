@@ -2,7 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../../../functional_spec_hel
 
 describe Stocko::Db::Yahoo::IndustryLoader do
   before :each do
-    @sector = Factory(:sector)
+    @sector = Factory(:sector_materials)
     @loader = Stocko::Db::Yahoo::IndustryLoader.new
   end
   
