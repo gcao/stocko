@@ -1,13 +1,12 @@
-module Report
+require File.dirname(__FILE__) + '/config'
+
+module ReportThis
   class Base
     attr_reader :model, :config
 
     def initialize model, config = nil
       @model = model
-      @config = if   config.nil?
-        then Report::Config.default
-      else config 
-      end
+      @config = config.nil? ? ReportThis::Config.default : config
     end
 
     def header

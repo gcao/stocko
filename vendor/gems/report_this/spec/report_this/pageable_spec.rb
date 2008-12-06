@@ -1,13 +1,13 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
-require File.expand_path(File.dirname(__FILE__) + '/../../lib/report')
+require File.expand_path(File.dirname(__FILE__) + '/../../lib/report_this')
 
-module Report
+module ReportThis
   describe Pageable do
     before :each do
       @array = %w[one two three four five six]
-      config = Report::Config.new :page_size => 5
-      class TestReport < Report::Base
+      config = ReportThis::Config.new :page_size => 5
+      class TestReport < ReportThis::Base
         include Pageable
       end
       @report = TestReport.new @array, config

@@ -1,9 +1,9 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 require 'bigdecimal'
-require File.expand_path(File.dirname(__FILE__) + '/../../lib/report/base')
+require File.expand_path(File.dirname(__FILE__) + '/../../lib/report_this/base')
 
-module Report
+module ReportThis
   describe Base do
     it "initializer takes model as first argument" do
       report = Base.new 'test'
@@ -11,7 +11,7 @@ module Report
     end
 
     it "initializer takes optional config as second argument" do
-      config = Report::Config.new
+      config = ReportThis::Config.new
       report = Base.new 'test', config
       report.instance_variable_get(:'@config').should eql(config)
     end
@@ -21,7 +21,7 @@ module Report
     end
 
     it "should return report config" do
-      config = Report::Config.new
+      config = ReportThis::Config.new
       report = Base.new 'test', config
       report.config.should eql(config)
     end

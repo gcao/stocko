@@ -1,4 +1,4 @@
-module Report
+module ReportThis
   class Config
     DEFAULT_OPTIONS = {
       :page_size => 20
@@ -16,7 +16,7 @@ module Report
     end
 
     def self.default
-      @default ||= Report::Config.new
+      @default ||= ReportThis::Config.new
     end
   end
 end
