@@ -9,5 +9,3 @@ module ObjectExtensions
 end
 
 Object.send(:include, ObjectExtensions)
-
-Object.send(:include, Report)
