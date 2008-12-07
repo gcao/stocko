@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
-require File.expand_path(File.dirname(__FILE__) + '/../../lib/report_this/config')
+require 'report_this/config'
 
 module ReportThis
   describe Config do

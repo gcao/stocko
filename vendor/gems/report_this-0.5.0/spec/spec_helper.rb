@@ -1,7 +1,7 @@
 $:.push(File.dirname(__FILE__) + '/../lib')
 
-require File.dirname(__FILE__) + '/../../../../config/boot.rb'
-require File.dirname(__FILE__) + '/../../../../config/environment.rb'
+require 'rubygems'
+require 'active_support'
 require 'spec'
 
 Spec::Runner.configure do |config|
