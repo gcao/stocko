@@ -28,7 +28,9 @@ module ReportThis
   end
   
   def self.included(base)
-    base.include(InstanceMethods)
+    base.send(:include, InstanceMethods)
     base.extend(ClassMethods)
   end
 end
+
+Object.send(:include, ReportThis)
